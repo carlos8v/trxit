@@ -22,7 +22,9 @@ describe('Create User controller', () => {
 
     const mockedNewUser: CreateUserData = makeSut()
 
-    await expect(createUserUseCase(mockedNewUser)).resolves.not.toThrow()
+    const response = await createUserUseCase(mockedNewUser)
+    expect(response).not.toBeInstanceOf(Error)
+    expect(response.id).not.toBeNull()
   })
 
   it('Should not create already registered user', async () => {

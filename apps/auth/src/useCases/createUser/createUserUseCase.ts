@@ -9,6 +9,8 @@ export const createUserUseCaseFactory = ({ userRepository }: CreateUserUseCaseFa
 
     const newUser = User(userData)
     await userRepository.create(newUser)
+
+    return newUser
   }
 
   return createUserUseCase

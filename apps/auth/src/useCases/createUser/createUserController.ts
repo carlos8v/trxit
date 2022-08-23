@@ -1,14 +1,21 @@
-import { helpers } from '@bank/common'
+import { created, badRequest } from '@bank/common'
+
 import { CreateUserControllerFactory, CreateUserController, CreateUserData } from './createUserDTO'
 
-export const createUserControllerFactory = ({ createUserUseCase }: CreateUserControllerFactory) => {
+export const createUserControllerFactory = ({
+  createUserUseCase,
+  jwtSign
+}: CreateUserControllerFactory) => {
   const createUserController: CreateUserController = async (req) => {
     try {
       const userData = req.body as CreateUserData
-      await createUserUseCase(userData)
-      return helpers.created()
+      const newUser = await createUserUseCase(userData)
+
+      const jwt = jwtSign(newUser)
+
+      return created({ accessToken: jwt })
     } catch (error: Error | any) {
-      return helpers.badRequest(error?.message)
+      return badRequest(error?.message)
     }
   }
 
