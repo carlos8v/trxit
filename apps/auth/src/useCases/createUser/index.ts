@@ -1,15 +1,10 @@
-import { UserRepository } from '../../repositories/UserRepository'
+import { TypeormUserRepository } from '../../repositories/typeorm/typeormUserRepository'
 import { createUserControllerFactory } from './createUserController'
 import { createUserUseCaseFactory } from './createUserUseCase'
 
 import jwt from 'jsonwebtoken'
 
-const mockedUserRepository: UserRepository = {
-  create: (_userData) => Promise.resolve(),
-  findByCPF: (_cpf) =>  Promise.resolve(null)
-}
-
-const createUserUseCase = createUserUseCaseFactory({ userRepository: mockedUserRepository })
+const createUserUseCase = createUserUseCaseFactory({ userRepository: TypeormUserRepository })
 const createUserController = createUserControllerFactory({
   createUserUseCase,
   jwtSign: (payload: any) => jwt.sign(payload, process.env.JWT_SECRET || '')

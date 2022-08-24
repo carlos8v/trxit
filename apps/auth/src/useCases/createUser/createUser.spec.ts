@@ -14,7 +14,7 @@ const makeSut = () => ({
   password: Math.floor(1000 + Math.random() * 9000).toString()
 })
 
-describe('Create User controller', () => {
+describe('[@cube/auth] Create User UseCase', () => {
   it('Should create user correctly', async () => {
     const inMemoryUserRepository = InMemoryUserRepositoryFactory()
 

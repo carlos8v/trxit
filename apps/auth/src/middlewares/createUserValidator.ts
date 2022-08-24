@@ -4,10 +4,10 @@ import { Request } from 'express'
 import { ok, unprocessableEntity, expressMiddlewareAdapter } from '@cube/common'
 
 const createUserSchema = z.object({
-  cpf: z.string().length(11),
+  cpf: z.string().length(11).regex(/^\d{11}$/g),
   name: z.string(),
   email: z.string().email(),
-  password: z.string().length(4).regex(/^\d{4}$/)
+  password: z.string().length(4).regex(/^\d{4}$/g)
 })
 
 export default expressMiddlewareAdapter(async (req: Request) => {

@@ -2,7 +2,7 @@ import { Request } from 'express'
 import { IHttpHelper } from '@cube/common'
 
 import { UserModel } from '../../domain/User'
-import { UserRepository } from '../../repositories/UserRepository'
+import { UserRepository } from '../../repositories/userRepository'
 
 export type CreateUserData = {
   cpf: string
