@@ -2,12 +2,12 @@ import { randomUUID } from 'crypto'
 
 import { InMemoryUserRepositoryFactory } from '@tests/inMemoryUserRepository'
 
-import { UserModel } from '@domain/User'
+import { CreateUserModel } from '@domain/User'
 
 import { CreateUserData } from './createUserDTO'
 import { createUserUseCaseFactory } from './createUserUseCase'
 
-const makeSut = () => ({
+const makeSut = (): CreateUserData => ({
   name: 'Fulano de Tal',
   cpf: '71854837869',
   email: 'fulanodtal@email.com',
@@ -28,8 +28,10 @@ describe('[@cube/auth] Create User UseCase', () => {
   })
 
   it('Should not create already registered user', async () => {
-    const mockedUser: UserModel = {
+    const mockedUser: Required<CreateUserModel> = {
       id: randomUUID(),
+      createdAt: new Date,
+      updatedAt: null,
       ...makeSut()
     }
 

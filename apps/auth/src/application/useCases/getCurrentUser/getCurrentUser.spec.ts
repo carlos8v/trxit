@@ -1,13 +1,19 @@
+import { randomUUID } from 'crypto'
+
+import { UserModel } from '@domain/User'
+
 import { InMemoryUserRepositoryFactory } from '@tests/inMemoryUserRepository'
 
 import { getCurrentUserUseCaseFactory } from './getCurrentUserUseCase'
 
-const makeSut = () => ({
-  id: '123',
+const makeSut = (): UserModel => ({
+  id: randomUUID(),
   name: 'Fulano de Tal',
   cpf: '71854837869',
   email: 'fulanodtal@email.com',
-  password: Math.floor(1000 + Math.random() * 9000).toString()
+  password: Math.floor(1000 + Math.random() * 9000).toString(),
+  createdAt: new Date(),
+  updatedAt: null
 })
 
 describe('[@cube/auth] Get Current User UseCase', () => {
@@ -27,7 +33,7 @@ describe('[@cube/auth] Get Current User UseCase', () => {
     const inMemoryUserRepository = InMemoryUserRepositoryFactory()
     const getCurrentUserUseCase = getCurrentUserUseCaseFactory({ userRepository: inMemoryUserRepository })
 
-    const inexistentUserId = '123'
+    const inexistentUserId = randomUUID()
 
     await expect(getCurrentUserUseCase(inexistentUserId)).rejects.toThrowError()
     await expect(getCurrentUserUseCase(inexistentUserId)).rejects.toBeInstanceOf(Error)

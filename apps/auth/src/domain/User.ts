@@ -8,11 +8,11 @@ export type UserModel = {
   cpf: string
   password: string
   createdAt: Date
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 type OptionalCreateProps = 'id' | 'createdAt' | 'updatedAt'
-type CreateUserModel = Omit<UserModel, OptionalCreateProps> & Partial<Pick<UserModel, OptionalCreateProps>>
+export type CreateUserModel = Omit<UserModel, OptionalCreateProps> & Partial<Pick<UserModel, OptionalCreateProps>>
 
 export const saltRounds = 10
 
