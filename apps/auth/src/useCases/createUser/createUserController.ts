@@ -1,4 +1,4 @@
-import { created, badRequest } from '@bank/common'
+import { created, badRequest } from '@cube/common'
 
 import { CreateUserControllerFactory, CreateUserController, CreateUserData } from './createUserDTO'
 

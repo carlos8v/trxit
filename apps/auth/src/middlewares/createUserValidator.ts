@@ -1,7 +1,7 @@
 import z from 'zod'
 import { Request } from 'express'
 
-import { ok, unprocessableEntity, expressMiddlewareAdapter } from '@bank/common'
+import { ok, unprocessableEntity, expressMiddlewareAdapter } from '@cube/common'
 
 const createUserSchema = z.object({
   cpf: z.string().length(11),

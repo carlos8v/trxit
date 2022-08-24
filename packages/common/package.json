@@ -1,5 +1,5 @@
 {
-  "name": "@bank/common",
+  "name": "@cube/common",
   "version": "0.1.0",
   "description": "Package of common adapters and helpers",
   "private": false,

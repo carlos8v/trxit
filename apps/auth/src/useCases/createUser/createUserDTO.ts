@@ -1,5 +1,5 @@
 import { Request } from 'express'
-import { IHttpHelper } from '@bank/common'
+import { IHttpHelper } from '@cube/common'
 
 import { UserModel } from '../../domain/User'
 import { UserRepository } from '../../repositories/UserRepository'

@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { expressRouteAdapter } from '@bank/common'
+import { expressRouteAdapter } from '@cube/common'
 
 import createUser from '../useCases/createUser'
 
