@@ -1,5 +1,5 @@
-import { UserModel } from '../src/domain/User'
-import { UserRepository } from '../src/repositories/userRepository'
+import { UserModel } from '@domain/User'
+import { UserRepository } from '@application/repositories/userRepository'
 
 export const InMemoryUserRepositoryFactory = (): UserRepository => {
   const data: UserModel[] = []

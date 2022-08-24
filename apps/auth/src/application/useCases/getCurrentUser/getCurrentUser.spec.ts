@@ -1,4 +1,4 @@
-import { InMemoryUserRepositoryFactory } from '../../../test/inMemoryUserRepository'
+import { InMemoryUserRepositoryFactory } from '@tests/inMemoryUserRepository'
 
 import { getCurrentUserUseCaseFactory } from './getCurrentUserUseCase'
 

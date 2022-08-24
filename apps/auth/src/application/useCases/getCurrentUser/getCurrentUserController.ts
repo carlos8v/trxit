@@ -1,5 +1,5 @@
-import { ok, badRequest, unauthorized } from '@cube/common'
 import { Request } from 'express'
+import { ok, badRequest, unauthorized } from '@cube/common'
 
 import { GetCurrentUserControllerFactory, GetCurrentUserController } from './getCurrentUserDTO'
 

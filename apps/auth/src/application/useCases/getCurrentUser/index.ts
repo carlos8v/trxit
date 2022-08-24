@@ -1,4 +1,4 @@
-import { TypeormUserRepository } from '../../repositories/typeorm/typeormUserRepository'
+import { TypeormUserRepository } from '@typeorm/typeormUserRepository'
 import { getCurrentUserControllerFactory } from './getCurrentUserController'
 import { getCurrentUserUseCaseFactory } from './getCurrentUserUseCase'
 

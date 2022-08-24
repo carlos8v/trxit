@@ -1,8 +1,8 @@
 import { randomUUID } from 'crypto'
 
-import { InMemoryUserRepositoryFactory } from '../../../test/inMemoryUserRepository'
+import { InMemoryUserRepositoryFactory } from '@tests/inMemoryUserRepository'
 
-import { UserModel } from '../../domain/User'
+import { UserModel } from '@domain/User'
 
 import { CreateUserData } from './createUserDTO'
 import { createUserUseCaseFactory } from './createUserUseCase'

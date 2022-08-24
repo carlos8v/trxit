@@ -1,4 +1,4 @@
-import { UserModel } from '../domain/User'
+import { UserModel } from '@domain/User'
 
 export interface UserRepository {
   create(userData: UserModel): Promise<void>

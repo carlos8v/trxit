@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import { expressRouteAdapter } from '@cube/common'
 
-import createUserController from '../useCases/createUser'
-import getCurrentUserController from '../useCases/getCurrentUser'
+import createUserController from '@application/useCases/createUser'
+import getCurrentUserController from '@application/useCases/getCurrentUser'
 
 import createUserValidator from '../middlewares/createUserValidator'
 import authMiddleware from '../middlewares/authMiddleware'

@@ -1,4 +1,4 @@
-import { UserRepository } from '../userRepository'
+import { UserRepository } from '@application/repositories/userRepository'
 
 const mockedTypeormUserRepository: UserRepository = {
   create: () => Promise.resolve(),
