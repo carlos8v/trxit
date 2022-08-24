@@ -5,12 +5,12 @@ export const signInControllerFactory = ({ signInUseCase, jwtSign }: SignInContro
   const signInController: SignInController = async (req) => {
     try {
       const signInData = req.body as SignInData
-      const signedInUser = await signInUseCase(signInData)
+      const signedInIndividual = await signInUseCase(signInData)
 
-      const jwt = jwtSign({ id: signedInUser.id, email: signedInUser.email })
+      const jwt = jwtSign({ id: signedInIndividual.id, email: signedInIndividual.email })
       req.session = { accessToken: jwt }
 
-      return ok(signedInUser)
+      return ok(signedInIndividual)
     } catch (error: Error | any) {
       return badRequest(error?.message)
     }

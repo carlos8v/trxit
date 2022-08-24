@@ -1,7 +1,7 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm'
 
-@Entity({ name: 'users', schema: process.env.DB_SCHEMA })
-export class User {
+@Entity({ name: 'individuals', schema: process.env.DB_SCHEMA })
+export class Individual {
   @PrimaryColumn({ type: 'uuid' })
   id: string
 
@@ -41,5 +41,12 @@ export class User {
     name: 'updated_at',
     nullable: true
   })
-  updatedAt: Date
+  updatedAt?: Date
+
+  @DeleteDateColumn({
+    type: 'timestamptz',
+    name: 'deleted_at',
+    nullable: true
+  })
+  deletedAt?: Date
 }

@@ -1,15 +1,15 @@
 import { SignInUseCase, SignInUseCaseFactory } from './signInDTO'
 
-export const signInUseCaseFactory = ({ userRepository, verifyUserPassword }: SignInUseCaseFactory) => {
+export const signInUseCaseFactory = ({ individualRepository, verifyIndividualPassword }: SignInUseCaseFactory) => {
   const signInUseCase: SignInUseCase = async ({ cpf, password }) => {
-    const userExists = await userRepository.findByCPF(cpf)
-    if (!userExists || !userExists.id) throw new Error('Usuário não encontrado')
+    const individualExists = await individualRepository.findByCPF(cpf)
+    if (!individualExists || !individualExists.id) throw new Error('Usuário não encontrado')
 
-    const isValidPassword = await verifyUserPassword(password, userExists.password)
+    const isValidPassword = await verifyIndividualPassword(password, individualExists.password)
     if (!isValidPassword) throw new Error('Credenciais inválidas')
 
-    const { password: _, ...safeUser } = userExists
-    return safeUser
+    const { password: _, ...safeIndividual } = individualExists
+    return safeIndividual
   }
 
   return signInUseCase

@@ -1,7 +1,7 @@
 import { Express } from 'express'
 
-import userRouter from './user.routes'
+import individualRouter from './individual.routes'
 
 export const setupRoutes = (app: Express) => {
-  app.use('/users', userRouter)
+  app.use('/individual', individualRouter)
 }

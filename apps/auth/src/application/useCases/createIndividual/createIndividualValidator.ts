@@ -1,7 +1,7 @@
 import z from 'zod'
 import { validateCPF } from 'validations-br'
 
-export const createUserSchema = z.object({
+export const createIndividualSchema = z.object({
   cpf: z.string()
     .length(11)
     .regex(/^\d{11}$/g)

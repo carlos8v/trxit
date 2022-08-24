@@ -1,8 +1,8 @@
 import { Request } from 'express'
 import { IHttpHelper } from '@cube/common'
 
-import { UserModel } from '@domain/User'
-import { UserRepository } from '@application/repositories/userRepository'
+import { IndividualModel } from '@domain/Individual'
+import { IndividualRepository } from '@application/repositories/individualRepository'
 
 export type SignInData = {
   cpf: string
@@ -10,10 +10,10 @@ export type SignInData = {
 }
 
 export type SignInUseCaseFactory = {
-  userRepository: UserRepository
-  verifyUserPassword: (pass: string, userPass: string) => Promise<boolean>
+  individualRepository: IndividualRepository
+  verifyIndividualPassword: (pass: string, IndividualPass: string) => Promise<boolean>
 }
-export type SignInUseCase = (data: SignInData) => Promise<Omit<UserModel, 'password'>>
+export type SignInUseCase = (data: SignInData) => Promise<Omit<IndividualModel, 'password'>>
 
 export type SignInControllerFactory = {
   signInUseCase: SignInUseCase,

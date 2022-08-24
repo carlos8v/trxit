@@ -1,50 +1,50 @@
-import { User, CreateUserModel, verifyUserPassword } from '@domain/User'
+import { Individual, CreateIndividualModel, verifyIndividualPassword } from '@domain/Individual'
 
-import { InMemoryUserRepositoryFactory } from '@tests/inMemoryUserRepository'
+import { InMemoryIndividualRepositoryFactory } from '@tests/inMemoryIndividualRepository'
 
 import { signInUseCaseFactory } from './signInUseCase'
 import { SignInData } from './signInDTO'
 
-const makeSut = (): CreateUserModel => ({
+const makeSut = (): CreateIndividualModel => ({
   name: 'Fulano de Tal',
   cpf: '71854837869',
   email: 'fulanodtal@email.com',
   password: Math.floor(1000 + Math.random() * 9000).toString()
 })
 
-describe('[@cube/auth] Sign in User UseCase', () => {
-  it('Should sign in user correctly', async () => {
-    const mockedUserData = makeSut()
-    const mockedNewUser = await User(mockedUserData)
+describe('[@cube/auth] Sign in Individual UseCase', () => {
+  it('Should sign in Individual correctly', async () => {
+    const mockedIndividualData = makeSut()
+    const mockedNewIndividual = await Individual(mockedIndividualData)
 
-    const inMemoryUserRepository = InMemoryUserRepositoryFactory()
-    inMemoryUserRepository.create(mockedNewUser)
+    const inMemoryIndividualRepository = InMemoryIndividualRepositoryFactory()
+    inMemoryIndividualRepository.create(mockedNewIndividual)
 
     const signInUseCase = signInUseCaseFactory({
-      userRepository: inMemoryUserRepository,
-      verifyUserPassword: verifyUserPassword
+      individualRepository: inMemoryIndividualRepository,
+      verifyIndividualPassword: verifyIndividualPassword
     })
 
-    const response = await signInUseCase({ cpf: mockedNewUser.cpf, password: mockedUserData.password })
+    const response = await signInUseCase({ cpf: mockedNewIndividual.cpf, password: mockedIndividualData.password })
     expect(response).not.toBeInstanceOf(Error)
     expect(response.id).not.toBeNull()
   })
 
-  it('Should not recover unregistered user', async () => {
-    const mockedUserData = makeSut()
-    const inMemoryUserRepository = InMemoryUserRepositoryFactory()
+  it('Should not recover unregistered Individual', async () => {
+    const mockedIndividualData = makeSut()
+    const inMemoryIndividualRepository = InMemoryIndividualRepositoryFactory()
 
     const signInUseCase = signInUseCaseFactory({
-      userRepository: inMemoryUserRepository,
-      verifyUserPassword: verifyUserPassword
+      individualRepository: inMemoryIndividualRepository,
+      verifyIndividualPassword: verifyIndividualPassword
     })
 
-    const userPayload: SignInData = {
-      cpf: mockedUserData.cpf,
-      password: mockedUserData.password
+    const IndividualPayload: SignInData = {
+      cpf: mockedIndividualData.cpf,
+      password: mockedIndividualData.password
     }
 
-    await expect(signInUseCase(userPayload)).rejects.toThrowError()
-    await expect(signInUseCase(userPayload)).rejects.toBeInstanceOf(Error)
+    await expect(signInUseCase(IndividualPayload)).rejects.toThrowError()
+    await expect(signInUseCase(IndividualPayload)).rejects.toBeInstanceOf(Error)
   })
 })
