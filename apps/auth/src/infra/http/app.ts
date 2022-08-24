@@ -1,6 +1,7 @@
 import express from 'express'
 import cookie from 'cookie-session'
 
+import { initializeDatabaseConnection } from '@typeorm/adapters/dataSource'
 import { setupRoutes } from './routes'
 
 export const app = express()
@@ -14,3 +15,4 @@ app.use(cookie({
 app.use(express.json())
 
 setupRoutes(app)
+initializeDatabaseConnection()
