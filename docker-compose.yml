@@ -1,0 +1,9 @@
+version: '3'
+services:
+  auth:
+    container_name: cube-auth
+    build:
+      context: ./apps/auth
+    image: cube/auth
+    env_file:
+      - './apps/auth/.env'

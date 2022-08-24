@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db:
+    container_name: 'cube-db'
+    image: postgres
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: cube-auth
+      POSTGRES_PASSWORD: cube-auth
+      POSTGRES_DB: cube-auth
+  auth:
+    depends_on:
+      - 'db'
