@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt from '@application/services/jwt'
 import { ok, unauthorized, expressMiddlewareAdapter } from '@cube/common'
 
 import { Request } from 'express'
@@ -9,7 +9,7 @@ export default expressMiddlewareAdapter(async (req: Request) => {
   if (!jwt) return unauthorized('Usuário não autenticado')
 
   try {
-    const userPayload = jwt.verify(accessToken, process.env.JWT_SECRET || '')
+    const userPayload = jwt.verify(accessToken)
     req.user = userPayload as UserPayload
 
     return ok()

@@ -2,12 +2,9 @@ import { userRepository } from '@typeorm/repositories/userRepository'
 import { createUserControllerFactory } from './createUserController'
 import { createUserUseCaseFactory } from './createUserUseCase'
 
-import jwt from 'jsonwebtoken'
+import jwt from '@application/services/jwt'
 
 const createUserUseCase = createUserUseCaseFactory({ userRepository })
-const createUserController = createUserControllerFactory({
-  createUserUseCase,
-  jwtSign: (payload: any) => jwt.sign(payload, process.env.JWT_SECRET || '')
-})
+const createUserController = createUserControllerFactory({ createUserUseCase, jwtSign: jwt.sign })
 
 export default createUserController
