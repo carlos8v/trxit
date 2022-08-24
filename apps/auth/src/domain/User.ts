@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt'
 import { randomUUID } from 'crypto'
 
 export type UserModel = {
@@ -8,7 +9,10 @@ export type UserModel = {
   email: string
 }
 
+export const saltRounds = 10
+
 export const User = (userData: UserModel) => ({
+  ...userData,
   id: userData.id || randomUUID(),
-  ...userData
+  password: bcrypt.hashSync(userData.password, saltRounds)
 })
