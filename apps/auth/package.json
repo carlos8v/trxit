@@ -1,7 +1,7 @@
 {
   "name": "@cube/auth",
   "version": "0.1.0",
-  "description": "",
+  "description": "Auth service of cube app",
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/infra/http/server.ts",
