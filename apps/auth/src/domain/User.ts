@@ -16,10 +16,14 @@ export type CreateUserModel = Omit<UserModel, OptionalCreateProps> & Partial<Pic
 
 export const saltRounds = 10
 
-export const User = (userData: CreateUserModel): UserModel => ({
+export const User = async (userData: CreateUserModel): Promise<UserModel> => ({
   ...userData,
   id: userData.id || randomUUID(),
-  password: bcrypt.hashSync(userData.password, saltRounds),
+  password: await bcrypt.hash(userData.password, saltRounds),
   createdAt: userData.createdAt || new Date(),
   updatedAt: userData?.updatedAt
 })
+
+export const verifyUserPassword = (password: string, userPassword: string): Promise<boolean> => {
+  return bcrypt.compare(password, userPassword)
+}

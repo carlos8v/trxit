@@ -7,7 +7,7 @@ export const createUserUseCaseFactory = ({ userRepository }: CreateUserUseCaseFa
     const userAlreadyExists = await userRepository.findByCPF(userData.cpf)
     if (userAlreadyExists?.cpf) throw new Error('Usuário já existe')
 
-    const newUser = User(userData)
+    const newUser = await User(userData)
     await userRepository.create(newUser)
 
     return newUser

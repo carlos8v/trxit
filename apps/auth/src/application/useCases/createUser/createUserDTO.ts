@@ -1,15 +1,13 @@
+import z from 'zod'
 import { Request } from 'express'
 import { IHttpHelper } from '@cube/common'
+
+import { createUserSchema } from '@application/useCases/createUser/createUserValidator'
 
 import { UserModel } from '@domain/User'
 import { UserRepository } from '@application/repositories/userRepository'
 
-export type CreateUserData = {
-  cpf: string
-  name: string
-  password: string
-  email: string
-}
+export type CreateUserData = z.infer<typeof createUserSchema>
 
 export type CreateUserUseCaseFactory = { userRepository: UserRepository }
 export type CreateUserUseCase = (userData: CreateUserData) => Promise<UserModel>
