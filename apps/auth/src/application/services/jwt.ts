@@ -1,9 +1,10 @@
 import jwt, { SignOptions } from 'jsonwebtoken'
+import { jwtExpireTime } from '@cube/common'
 
-const JWT_SECRET = process.env.JWT_SECRET || ''
+const JWT_SECRET = process.env.JWT_SECRET!
 
 const jwtOptions: SignOptions = {
-  expiresIn: '10m'
+  expiresIn: jwtExpireTime.formated
 }
 
 const sign = (payload: any) => jwt.sign(payload, JWT_SECRET, jwtOptions)

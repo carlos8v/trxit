@@ -6,7 +6,7 @@ import { GetCurrentIndividualControllerFactory, GetCurrentIndividualController }
 export const getCurrentIndividualControllerFactory = ({ getCurrentIndividualUseCase }: GetCurrentIndividualControllerFactory) => {
   const getCurrentIndividualController: GetCurrentIndividualController = async (req: Request) => {
     try {
-      const individualId = req.user?.id
+      const individualId = req.client?.id
       if (!individualId) return unauthorized('Usuário não autenticado')
 
       const currentIndividual = await getCurrentIndividualUseCase(individualId)
