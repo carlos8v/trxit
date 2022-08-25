@@ -8,7 +8,7 @@ export const app = express()
 
 app.set('trust proxy', true)
 app.use(cookie({
-  secret: process.env.COOKIE_SECRET || '',
+  signed: false,
   maxAge: 1000 * 60 * 10
 }))
 
