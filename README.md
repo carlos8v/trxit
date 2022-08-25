@@ -15,5 +15,6 @@ Conta digital
 
 - `auth` lida com a autenticação de todo o app utilizando JWT e Cookie;
 - `account` lida com as contas digitais;
-- `common` todas as funcionalidades comuns do app, disponibilizado como um pacote;
 - `transfer` lida com a transferência de valores de uma conta para outra.
+- `proxy` lida com a orquestração dos serviços;
+- `common` todas as funcionalidades comuns do app, disponibilizado como um pacote;
