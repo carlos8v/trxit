@@ -14,7 +14,8 @@ export const dataSource = new DataSource({
   schema: process.env.DB_SCHEMA,
   entities: [`${resolve(__dirname, '..', 'entities')}/*.{ts,js}`],
   migrations: [`${resolve(__dirname, '..', 'migrations')}/*.{ts,js}`],
-  connectTimeoutMS: 1000 * 10
+  connectTimeoutMS: 1000 * 10,
+  migrationsRun: true
 })
 
 export const initializeDatabaseConnection = async () => {
