@@ -4,6 +4,17 @@ services:
     container_name: cube-auth
     build:
       context: ./apps/auth
+      args:
+        - PORT=80
     image: cube/auth
     env_file:
       - './apps/auth/.env'
+  proxy:
+    container_name: cube-proxy
+    build:
+      context: ./apps/proxy
+    image: cube/proxy
+    ports:
+      - 80:80
+    depends_on:
+      - auth

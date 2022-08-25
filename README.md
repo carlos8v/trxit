@@ -17,4 +17,4 @@ Conta digital
 - `account` lida com as contas digitais;
 - `transfer` lida com a transferência de valores de uma conta para outra.
 - `proxy` lida com a orquestração dos serviços;
-- `common` todas as funcionalidades comuns do app, disponibilizado como um pacote;
+- `common` todas as funcionalidades comuns do app, disponibilizado como um pacote.

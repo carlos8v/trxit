@@ -1,7 +1,7 @@
 version: '3'
 services:
-  db:
-    container_name: 'cube-db'
+  auth-db:
+    container_name: 'cube-auth-db'
     image: postgres
     ports:
       - 5433:5432
@@ -11,4 +11,4 @@ services:
       POSTGRES_DB: cube-auth
   auth:
     depends_on:
-      - 'db'
+      - 'auth-db'
