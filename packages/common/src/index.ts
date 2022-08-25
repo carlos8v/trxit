@@ -15,5 +15,7 @@ export { default as jwtExpireTime } from './constants/jwtExpireTime'
 
 export { default as requireAuth } from './middlewares/requireAuth'
 
+export { default as events } from './events'
+
 export { default as expressRouteAdapter } from './adapters/expressRouteAdapter'
 export { default as expressMiddlewareAdapter } from './adapters/expressMiddlewareAdapter'
