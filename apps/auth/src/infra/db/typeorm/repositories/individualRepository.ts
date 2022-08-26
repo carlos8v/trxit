@@ -2,20 +2,19 @@ import { dataSource } from '../adapters/dataSource'
 import { Individual } from '../entities/Individual'
 import { IndividualRepository } from '@application/repositories/individualRepository'
 
+const typeormIndividualRepository = dataSource.getRepository(Individual)
+
 const create: IndividualRepository['create'] = async (individualData) => {
-  const individualRepository = dataSource.getRepository(Individual)
-  await individualRepository.save(individualData)
+  await typeormIndividualRepository.save(individualData)
 }
 
 const findByCPF: IndividualRepository['findByCPF'] = async (cpf) => {
-  const individualRepository = dataSource.getRepository(Individual)
-  const individual = await individualRepository.findOneBy({ cpf })
+  const individual = await typeormIndividualRepository.findOneBy({ cpf })
   return individual
 }
 
 const findById: IndividualRepository['findById'] = async (id) => {
-  const individualRepository = dataSource.getRepository(Individual)
-  const individual = await individualRepository.findOneBy({ id })
+  const individual = await typeormIndividualRepository.findOneBy({ id })
   return individual
 }
 

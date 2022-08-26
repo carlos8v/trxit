@@ -1,5 +1,7 @@
 import { Individual } from '@domain/Individual'
+
 import { events } from '@cube/common'
+import type { IndividualCreatedPayload } from '@cube/common'
 
 import { CreateIndividualUseCase, CreateIndividualUseCaseFactory } from './createIndividualDTO'
 
@@ -15,10 +17,11 @@ export const createIndividualUseCaseFactory = ({
     await individualRepository.create(newIndividual)
 
     await messagingAdapter.sendMessage(events.individualCreated, {
+      id: newIndividual.id,
       name: newIndividual.name,
       email: newIndividual.email,
       cpf: newIndividual.cpf,
-    })
+    } as IndividualCreatedPayload)
 
     return newIndividual
   }
