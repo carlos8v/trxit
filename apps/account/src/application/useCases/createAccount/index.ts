@@ -1,5 +1,5 @@
 import { createAccountUseCaseFactory } from './createAccountUseCase'
-import { createAccountControllerFactory } from './createAccountController'
+import { createAccountMessageAdapterFactory } from './createAccountMessageAdapter'
 
 const mockedAccountRepository = {
   create: () => Promise.resolve(),
@@ -7,6 +7,4 @@ const mockedAccountRepository = {
 }
 
 const createAccountUseCase = createAccountUseCaseFactory({ accountRepository: mockedAccountRepository })
-const createAccountController = createAccountControllerFactory({ createAccountUseCase })
-
-export default createAccountController
+export const createAccountMessageAdapter = createAccountMessageAdapterFactory({ createAccountUseCase })

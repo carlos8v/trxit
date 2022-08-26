@@ -9,5 +9,5 @@ export type CreateAccountData = {
 export type CreateAccountUseCaseFactory = { accountRepository: AccountRepository }
 export type CreateAccountUseCase = (accountData: CreateAccountData) => Promise<void>
 
-export type CreateAccountControllerFactory = { createAccountUseCase: CreateAccountUseCase }
-export type CreateAccountController = (account: string) => Promise<void>
+export type CreateAccountMessageAdapterFactory = { createAccountUseCase: CreateAccountUseCase }
+export type CreateAccountMessageAdapter = (account: string) => Promise<void>

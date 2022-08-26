@@ -5,7 +5,7 @@ if (!process.env.KAFKA_BROKER) {
 }
 
 export const kafka = new Kafka({
-  clientId: 'purchases',
+  clientId: 'accounts',
   brokers: [process.env.KAFKA_BROKER],
   ...(process.env.KAFKA_USER ? {
     sasl: {
