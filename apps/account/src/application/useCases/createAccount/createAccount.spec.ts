@@ -11,7 +11,7 @@ const makeSut = (): CreateAccountData => ({
   email: 'fulanodtal@email.com'
 })
 
-describe('[@cube/account] Create Account UseCase', () => {
+describe('[@cube/account]: Create Account UseCase', () => {
   it('Should create account normally', async () => {
     const inMemoryAccountRepository = InMemoryAccountRepositoryFactory()
     const repositoryCreateAccountFn = jest.spyOn(inMemoryAccountRepository, 'create')

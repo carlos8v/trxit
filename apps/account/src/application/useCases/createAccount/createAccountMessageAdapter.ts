@@ -11,7 +11,7 @@ export const createAccountMessageAdapterFactory = ({ createAccountUseCase }: Cre
     try {
       individual = JSON.parse(individualJSON)
     } catch (error) {
-      throw new Error('Credenciais de indivíduo inválidas')
+      throw new Error('Invalid individual credentials')
     }
 
     await createAccountUseCase(individual)

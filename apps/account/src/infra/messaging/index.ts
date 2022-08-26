@@ -11,7 +11,7 @@ const topicToMessageAdapter = {
 export const connectMessageBroker = async () => {
   try {
     consumer.connect()
-    console.log('[@cube/account] Kafka consumer connected')
+    console.log('[@cube/account]: Kafka consumer connected')
   
     await consumer.subscribe({ topics: [events.individualCreated] })
     await consumer.run({
@@ -20,6 +20,7 @@ export const connectMessageBroker = async () => {
         if (!messageJSON) return
   
         if (!topicToMessageAdapter[topic]) return
+        console.log(`[@cube/account]: Message received on topic "${topic}"`);
   
         try {
           await topicToMessageAdapter[topic](messageJSON)
