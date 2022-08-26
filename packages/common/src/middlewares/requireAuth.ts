@@ -12,7 +12,7 @@ export interface ClientPayload {
 declare global {
   namespace Express {
     interface Request {
-      client?: ClientPayload;
+      currentClient?: ClientPayload;
     }
   }
 }
@@ -23,7 +23,7 @@ export default expressMiddlewareAdapter(async (req) => {
 
   try {
     const clientPayload = jwt.verify(accessToken, process.env.JWT_SECRET)
-    req.client = clientPayload as ClientPayload
+    req.currentClient = clientPayload as ClientPayload
 
     return ok()
   } catch(err) {
