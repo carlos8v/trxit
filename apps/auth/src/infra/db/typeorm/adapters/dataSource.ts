@@ -29,3 +29,5 @@ export const initializeDatabaseConnection = async () => {
     process.exit(1)
   }
 }
+
+export const destroyDatabaseConnection = async () => dataSource.destroy()

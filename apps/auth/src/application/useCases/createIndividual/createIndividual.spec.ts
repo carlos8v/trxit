@@ -1,6 +1,7 @@
 import { InMemoryIndividualRepositoryFactory } from '@tests/inMemoryIndividualRepository'
 
 import { Individual } from '@domain/Individual'
+import { MessagingAdapter } from '@application/adapters/MessagingAdapter'
 
 import { CreateIndividualData } from './createIndividualDTO'
 import { createIndividualUseCaseFactory } from './createIndividualUseCase'
@@ -12,11 +13,18 @@ const makeSut = (): CreateIndividualData => ({
   password: Math.floor(1000 + Math.random() * 9000).toString()
 })
 
-describe('[@cube/auth] Create Individual UseCase', () => {
+const mockedMessagingAdapter: MessagingAdapter = {
+  sendMessage: async () => Promise.resolve()
+}
+
+describe('[@cube/auth]: Create Individual UseCase', () => {
   it('Should create Individual correctly', async () => {
     const inMemoryIndividualRepository = InMemoryIndividualRepositoryFactory()
 
-    const createIndividualUseCase = createIndividualUseCaseFactory({ individualRepository: inMemoryIndividualRepository })
+    const createIndividualUseCase = createIndividualUseCaseFactory({
+      individualRepository: inMemoryIndividualRepository,
+      messagingAdapter: mockedMessagingAdapter
+    })
 
     const mockedNewIndividual: CreateIndividualData = makeSut()
 
@@ -32,7 +40,10 @@ describe('[@cube/auth] Create Individual UseCase', () => {
     const inMemoryIndividualRepository = InMemoryIndividualRepositoryFactory()
     inMemoryIndividualRepository.create(mockedIndividual)
 
-    const createIndividualUseCase = createIndividualUseCaseFactory({ individualRepository: inMemoryIndividualRepository })
+    const createIndividualUseCase = createIndividualUseCaseFactory({
+      individualRepository: inMemoryIndividualRepository,
+      messagingAdapter: mockedMessagingAdapter
+    })
 
     const { id, ...mockedNewIndividual } = mockedIndividual
 

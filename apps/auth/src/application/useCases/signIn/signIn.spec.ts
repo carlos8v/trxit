@@ -12,7 +12,7 @@ const makeSut = (): CreateIndividualModel => ({
   password: Math.floor(1000 + Math.random() * 9000).toString()
 })
 
-describe('[@cube/auth] Sign in Individual UseCase', () => {
+describe('[@cube/auth]: Sign in Individual UseCase', () => {
   it('Should sign in Individual correctly', async () => {
     const mockedIndividualData = makeSut()
     const mockedNewIndividual = await Individual(mockedIndividualData)

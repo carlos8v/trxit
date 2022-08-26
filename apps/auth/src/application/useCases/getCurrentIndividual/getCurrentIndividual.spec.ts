@@ -15,7 +15,7 @@ const makeSut = (): IndividualModel => ({
   createdAt: new Date()
 })
 
-describe('[@cube/auth] Get Current Individual UseCase', () => {
+describe('[@cube/auth]: Get Current Individual UseCase', () => {
   it('Should recover Individual correctly', async () => {
     const mockedNewIndividual = makeSut()
     const inMemoryIndividualRepository = InMemoryIndividualRepositoryFactory()
