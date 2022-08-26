@@ -10,6 +10,16 @@ services:
       POSTGRES_PASSWORD: cube-auth
       POSTGRES_DB: cube-auth
 
+  account-db:
+    container_name: cube-account-db
+    image: postgres
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: cube-account
+      POSTGRES_PASSWORD: cube-account
+      POSTGRES_DB: cube-account
+
   zookeeper:
     container_name: cube-zookeeper
     image: 'bitnami/zookeeper:3'
@@ -34,7 +44,9 @@ services:
   auth:
     depends_on:
       - 'auth-db'
+      - 'kafka'
 
   account:
     depends_on:
+      - 'account-db'
       - 'kafka'
