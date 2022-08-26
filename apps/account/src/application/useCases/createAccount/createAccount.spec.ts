@@ -1,3 +1,5 @@
+import { randomUUID } from 'crypto'
+
 import { InMemoryAccountRepositoryFactory } from '@tests/repositories/inMemoryAccountRepository'
 
 import { Account } from '@domain/Account'
@@ -6,6 +8,7 @@ import { CreateAccountData } from './createAccountDTO'
 import { createAccountUseCaseFactory } from './createAccountUseCase'
 
 const makeSut = (): CreateAccountData => ({
+  id: randomUUID(),
   cpf: '73269427069',
   name: 'Fulando de Tal',
   email: 'fulanodtal@email.com'
@@ -27,9 +30,10 @@ describe('[@cube/account]: Create Account UseCase', () => {
   it('Should not create not unique account', async () => {
     const mockedAccountData = makeSut()
     const mockedAccount = Account({
+      idPerson: mockedAccountData.id,
       document: mockedAccountData.cpf,
       name: mockedAccountData.name,
-      username: 'fulanotal'
+      username: 'fulano.tal'
     })
 
     const inMemoryAccountRepository = InMemoryAccountRepositoryFactory()

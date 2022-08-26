@@ -8,9 +8,10 @@ export const createAccountUseCaseFactory = ({ accountRepository }: CreateAccount
     if (accountExists) throw new Error('Conta já existente')
 
     const nameArr = accountData.name.split(' ')
-    const username = `${nameArr[0].toLocaleLowerCase()}${nameArr?.pop()?.toLocaleLowerCase()}`
+    const username = `${nameArr[0].toLocaleLowerCase()}.${nameArr.pop()?.toLocaleLowerCase()}`
 
     const newAccount = Account({
+      idPerson: accountData.id,
       name: accountData.name,
       username,
       document: accountData.cpf,

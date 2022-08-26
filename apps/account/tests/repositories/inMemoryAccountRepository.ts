@@ -6,6 +6,7 @@ export const InMemoryAccountRepositoryFactory = (): AccountRepository => {
 
   return {
     create: async (accountData) => { data.push(accountData) },
-    findByDocument: async (document) => data.find((account) => account.document === document) || null
+    findByDocument: async (document) => data.find((account) => account.document === document) || null,
+    findByIdPerson: async (idPerson) => data.find((account) => account.idPerson === idPerson) || null
   }
 }

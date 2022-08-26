@@ -4,6 +4,7 @@ export type AccountStatus = 'PENDING' | 'ACTIVE' | 'BLOCKED'
 
 export type AccountModel = {
   id: string
+  idPerson: string
   name: string
   document: string
   username: string

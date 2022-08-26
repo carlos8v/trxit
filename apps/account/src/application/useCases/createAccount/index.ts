@@ -1,10 +1,7 @@
+import { accountRepository } from '@typeorm/repositories/accountRepository'
+
 import { createAccountUseCaseFactory } from './createAccountUseCase'
 import { createAccountMessageAdapterFactory } from './createAccountMessageAdapter'
 
-const mockedAccountRepository = {
-  create: () => Promise.resolve(),
-  findByDocument: () => Promise.resolve(null)
-}
-
-const createAccountUseCase = createAccountUseCaseFactory({ accountRepository: mockedAccountRepository })
+const createAccountUseCase = createAccountUseCaseFactory({ accountRepository })
 export const createAccountMessageAdapter = createAccountMessageAdapterFactory({ createAccountUseCase })
