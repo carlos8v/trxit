@@ -1,13 +1,15 @@
+import { resolve } from 'path'
+
 import express from 'express'
 import cookie from 'cookie-session'
+import cors from 'cors'
 
-import { ExpressAdapter } from '@bull-board/express'
-import { createBullBoard } from '@bull-board/api'
-import { BullAdapter } from '@bull-board/api/bullAdapter'
-
-import { queues } from '../messaging'
+import { setupRoutes } from './routes'
 
 export const app = express()
+
+app.set('views', resolve(__dirname, '../../static/views'))
+app.set('view engine', 'ejs')
 
 app.set('trust proxy', true)
 app.use(cookie({
@@ -15,12 +17,10 @@ app.use(cookie({
   maxAge: 1000 * 60 * 10
 }))
 
-const serverAdapter = new ExpressAdapter()
-serverAdapter.setBasePath('/')
+app.use(cors({
+  origin: '*'
+}))
 
-createBullBoard({
-  queues: queues.map((queue) => new BullAdapter(queue)),
-  serverAdapter
-})
+app.use(express.urlencoded({ extended: false }))
 
-app.use('/', serverAdapter.getRouter())
+setupRoutes(app)
