@@ -10,11 +10,9 @@ let server: Server
 
 const gracefulShutdown = async (e: any) => {
   console.error(e)
-
   await destroyDatabaseConnection()
   await disconnectMessageBroker()
   server?.close()
-
   process.exit(0)
 }
 

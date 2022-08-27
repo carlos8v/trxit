@@ -16,12 +16,12 @@ export const createIndividualUseCaseFactory = ({
     const newIndividual = await Individual(individualData)
     await individualRepository.create(newIndividual)
 
-    await messagingAdapter.sendMessage(events.individualCreated, {
+    await messagingAdapter.sendMessage<IndividualCreatedPayload>(events.individualCreated, {
       id: newIndividual.id,
       name: newIndividual.name,
       email: newIndividual.email,
-      cpf: newIndividual.cpf,
-    } as IndividualCreatedPayload)
+      cpf: newIndividual.cpf
+    })
 
     return newIndividual
   }

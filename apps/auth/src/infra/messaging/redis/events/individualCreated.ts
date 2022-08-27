@@ -1,0 +1,10 @@
+import { events } from '@cube/common'
+
+import { Event } from '../bull'
+
+const individualCreated: Event = {
+  key: events.individualCreated,
+  options: { attempts: 3 }
+}
+
+export default individualCreated
