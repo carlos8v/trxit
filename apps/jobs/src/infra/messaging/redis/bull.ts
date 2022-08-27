@@ -1,13 +1,8 @@
-import { QueueOptions, JobOptions } from 'bull'
+import { QueueOptions } from 'bull'
 
 import Redis, { Redis as RedisType, RedisOptions } from 'ioredis'
 export let client: RedisType
 export let subscriber: RedisType
-
-export type Event = {
-  key: string
-  options?: JobOptions
-}
 
 const redisOptions: RedisOptions = {
   host: process.env.REDIS_HOST,
