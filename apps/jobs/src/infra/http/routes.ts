@@ -10,7 +10,7 @@ import adminAuthMiddleware, { proxyPath } from './adminAuthMiddleware'
 
 export const setupRoutes = (app: Express) => {
   const serverAdapter = new ExpressAdapter()
-  serverAdapter.setBasePath('/')
+  serverAdapter.setBasePath(`${proxyPath}/admin`)
 
   createBullBoard({
     queues: queues.map((queue) => new BullAdapter(queue)),
@@ -18,7 +18,10 @@ export const setupRoutes = (app: Express) => {
   })
 
   app.get('/admin/login', (req, res) => {
-    res.render('login', { invalid: req.query.invalid === 'true' })
+    res.render('login', {
+      invalid: req.query.invalid === 'true',
+      proxyPath
+    })
   })
 
   app.post('/admin/login', (req, res) => {
@@ -35,7 +38,7 @@ export const setupRoutes = (app: Express) => {
       return res.redirect(`${proxyPath}/admin/login?invalid=true`)
     }
 
-    req.session = { admin: adminData }
+    req.session = { ...req.session, admin: adminData }
 
     return res.redirect(`${proxyPath}/admin`)
   })
