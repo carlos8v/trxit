@@ -1,3 +1,4 @@
 export interface MessagingAdapter {
-  sendMessage(topic: string, message: any): Promise<void>
+  sendMessage<T>(event: string, data: T): Promise<void>
+  process(event: string, handle: any): void
 }

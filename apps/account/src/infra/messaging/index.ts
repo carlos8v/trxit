@@ -1,39 +1,37 @@
-import { consumer } from './kafka/consumer'
+import { queues, client, subscriber } from './redis/bull'
 
 import { events } from '@cube/common'
 
-import { createAccountMessageAdapter } from '@application/useCases/createAccount'
+import pingEvent from './redis/events/ping'
+import { redisMessagingAdapter } from './redis/adapters/redisMessageAdapter'
 
-const topicToMessageAdapter = {
-  [events.individualCreated]: createAccountMessageAdapter
+import { createAccountUseCase } from '@application/useCases/createAccount'
+
+const messageAdapterEvents = {
+  [events.individualCreated]: createAccountUseCase
 }
 
 export const connectMessageBroker = async () => {
   try {
-    consumer.connect()
-    console.log('[@cube/account]: Kafka consumer connected')
-  
-    await consumer.subscribe({ topics: [events.individualCreated] })
-    await consumer.run({
-      eachMessage: async ({ topic, message }) => {
-        const messageJSON = message.value?.toString()
-        if (!messageJSON) return
-  
-        if (!topicToMessageAdapter[topic]) return
-        console.log(`[@cube/account]: Message received on topic "${topic}"`);
-  
-        try {
-          await topicToMessageAdapter[topic](messageJSON)
-        } catch (error) {
-          console.error(error)
-        }
-      }
+    redisMessagingAdapter.process(pingEvent.key, () => console.log('[@cube/auth]: Redis service broker connected'))
+    await redisMessagingAdapter.sendMessage(pingEvent.key, { timestamps: Date.now() })
+
+    Object.entries(messageAdapterEvents).forEach(([event, cb]) => {
+      redisMessagingAdapter.process(event, cb)
     })
+
   } catch (error) {
     console.log(error)
-    console.error('Kafka consumer not initialized')
+    console.error('Redis service broker not initialized')
     process.exit(1)
   }
 }
 
-export const disconnectMessageBroker = async () => await consumer.disconnect()
+export const disconnectMessageBroker = async () => {
+  for (const { bull } of queues) {
+    await bull?.close()
+  }
+
+  client?.disconnect()
+  subscriber?.disconnect()
+}
