@@ -9,6 +9,8 @@ services:
     image: cube/auth
     env_file:
       - './apps/auth/.env'
+    depends_on:
+      - jobs
 
   account:
     container_name: cube-account
@@ -19,6 +21,18 @@ services:
     image: cube/account
     env_file:
       - './apps/account/.env'
+    depends_on:
+      - jobs
+
+  jobs:
+    container_name: cube-jobs
+    build:
+      context: ./apps/jobs
+      args:
+        - PORT=80
+    image: cube/jobs
+    env_file:
+      - './apps/jobs/.env'
 
   proxy:
     container_name: cube-proxy
@@ -29,3 +43,5 @@ services:
       - 80:80
     depends_on:
       - auth
+      - account
+      - jobs
