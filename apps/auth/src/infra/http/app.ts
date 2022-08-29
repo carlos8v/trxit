@@ -7,6 +7,7 @@ export const app = express()
 
 app.set('trust proxy', true)
 app.use(cookie({
+  name: 'client_session',
   signed: false,
   maxAge: 1000 * 60 * 10
 }))

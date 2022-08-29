@@ -13,7 +13,7 @@ const messageAdapterEvents = {
 
 export const connectMessageBroker = async () => {
   try {
-    redisMessagingAdapter.process(pingEvent.key, () => console.log('[@cube/auth]: Redis service broker connected'))
+    redisMessagingAdapter.process(pingEvent.key, () => console.log('[@cube/auth]: Redis service connected'))
     await redisMessagingAdapter.sendMessage(pingEvent.key, { timestamps: Date.now() })
 
     Object.entries(messageAdapterEvents).forEach(([event, cb]) => {
@@ -22,7 +22,7 @@ export const connectMessageBroker = async () => {
 
   } catch (error) {
     console.log(error)
-    console.error('Redis service broker not initialized')
+    console.error('Redis service not initialized')
     process.exit(1)
   }
 }
