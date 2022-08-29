@@ -6,7 +6,10 @@ import { BullAdapter } from '@bull-board/api/bullAdapter'
 
 import { queues } from '../messaging'
 
-import adminAuthMiddleware, { proxyPath } from './adminAuthMiddleware'
+import { proxyPath } from '@application/utils/proxyPath'
+
+import { signInAdminController } from '@application/useCases/signInAdmin'
+import { authenticateAdminController } from '@application/useCases/authenticateAdmin'
 
 export const setupRoutes = (app: Express) => {
   const serverAdapter = new ExpressAdapter()
@@ -17,32 +20,11 @@ export const setupRoutes = (app: Express) => {
     serverAdapter
   })
 
-  app.get('/admin/login', (req, res) => {
-    res.render('login', {
-      invalid: req.query.invalid === 'true',
-      proxyPath
-    })
-  })
+  app.get('/admin/login', (req, res) => res.render('login', {
+    invalid: req.query.invalid === 'true',
+    proxyPath
+  }))
 
-  app.post('/admin/login', (req, res) => {
-    const adminData = req.body
-
-    if (!adminData || !adminData.username || !adminData.password) {
-      return res.redirect(`${proxyPath}/admin/login?invalid=true`)
-    }
-
-    if (
-      adminData.username !== process.env.DASHBOARD_USER ||
-      adminData.password !== process.env.DASHBOARD_PASS
-    ) {
-      return res.redirect(`${proxyPath}/admin/login?invalid=true`)
-    }
-
-    req.session = { ...req.session, admin: adminData }
-
-    return res.redirect(`${proxyPath}/admin`)
-  })
-
-
-  app.use('/admin', adminAuthMiddleware, serverAdapter.getRouter())
+  app.post('/admin/login', signInAdminController)
+  app.use('/admin', authenticateAdminController, serverAdapter.getRouter())
 }

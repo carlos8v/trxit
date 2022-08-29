@@ -13,6 +13,7 @@ app.set('view engine', 'ejs')
 
 app.set('trust proxy', true)
 app.use(cookie({
+  name: 'admin_session',
   signed: false,
   maxAge: 1000 * 60 * 10
 }))

@@ -10,7 +10,10 @@
     "skipLibCheck": true,
     "strictPropertyInitialization": false,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "paths": {
+      "@application/*": ["./src/application/*"]
+    }
   },
   "exclude": ["node_modules"]
 }
