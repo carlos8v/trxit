@@ -2,7 +2,6 @@ import { resolve } from 'path'
 
 import express from 'express'
 import cookie from 'cookie-session'
-import cors from 'cors'
 
 import { setupRoutes } from './routes'
 
@@ -16,10 +15,6 @@ app.use(cookie({
   name: 'admin_session',
   signed: false,
   maxAge: 1000 * 60 * 10
-}))
-
-app.use(cors({
-  origin: '*'
 }))
 
 app.use(express.urlencoded({ extended: false }))
