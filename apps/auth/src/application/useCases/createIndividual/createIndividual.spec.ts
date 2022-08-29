@@ -14,7 +14,8 @@ const makeSut = (): CreateIndividualData => ({
 })
 
 const mockedMessagingAdapter: MessagingAdapter = {
-  sendMessage: async () => Promise.resolve()
+  sendMessage: async () => Promise.resolve(),
+  process: async () => Promise.resolve()
 }
 
 describe('[@cube/auth]: Create Individual UseCase', () => {
