@@ -19,6 +19,7 @@ export const createAccountUseCaseFactory = ({ accountRepository }: CreateAccount
     })
 
     await accountRepository.create(newAccount)
+    return newAccount
   }
 
   return createAccountUseCase

@@ -10,7 +10,7 @@ import { createAccountUseCaseFactory } from './createAccountUseCase'
 const makeSut = (): CreateAccountData => ({
   id: randomUUID(),
   cpf: '73269427069',
-  name: 'Fulando de Tal',
+  name: 'Fulano de Tal',
   email: 'fulanodtal@email.com'
 })
 
@@ -21,10 +21,19 @@ describe('[@cube/account]: Create Account UseCase', () => {
 
     const newIndividualCreated = makeSut()
     const createAccountUseCase = createAccountUseCaseFactory({ accountRepository: inMemoryAccountRepository })
-    await createAccountUseCase(newIndividualCreated)
+    const createAccount = await createAccountUseCase(newIndividualCreated)
 
     expect(repositoryCreateAccountFn).toBeCalled()
     expect(repositoryCreateAccountFn).toBeCalledTimes(1)
+    expect(createAccount).toEqual(
+      expect.objectContaining({
+        idPerson: newIndividualCreated.id,
+        document: newIndividualCreated.cpf,
+        name: newIndividualCreated.name,
+        username: `${newIndividualCreated.name.split(' ')[0].toLowerCase()}.${newIndividualCreated.name.split(' ').pop()?.toLowerCase()}`,
+        status: 'ACTIVE'
+      })
+    )
   })
 
   it('Should not create not unique account', async () => {

@@ -21,8 +21,8 @@ export const redisMessagingAdapter: MessagingAdapter = {
     queue.bull.process(queue.name, async ({ data }, done) => {
       console.log(`[@cube/auth]: New "${queue.name}" event received`)
       try {
-        await handle(data)
-        done(null, data)
+        const response = await handle(data)
+        done(null, response || data)
       } catch (error: Error | any) {
         done(error, data)
       }
