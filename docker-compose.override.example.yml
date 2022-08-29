@@ -29,10 +29,12 @@ services:
   auth:
     depends_on:
       - 'auth-db'
+      - 'redis'
 
   account:
     depends_on:
       - 'account-db'
+      - 'redis'
 
   jobs:
     depends_on:
