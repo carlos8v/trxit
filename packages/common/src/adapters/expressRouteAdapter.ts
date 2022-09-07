@@ -1,11 +1,9 @@
 import { Request, Response } from 'express'
 import { BAD_REQUEST, INTERNAL_SERVER_ERROR } from 'http-status'
 
-import { IHttpHelper } from '../helpers/httpHelpers'
+import { HttpController } from '../helpers/httpHelpers'
 
-type ControllerFn = (req: Request) => Promise<IHttpHelper> | IHttpHelper
-
-export default function (controller: ControllerFn) {
+export default function (controller: HttpController) {
   return async (req: Request, res: Response) => {
     try {
       const controllerResponse = await controller(req)

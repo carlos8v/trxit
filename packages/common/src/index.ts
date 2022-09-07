@@ -1,5 +1,5 @@
 export { ClientPayload } from './middlewares/requireAuth'
-export type { IHttpHelper } from './helpers/httpHelpers'
+export type { HttpHelper, HttpController } from './helpers/httpHelpers'
 
 export type { IndividualCreatedPayload } from './events/individualCreated'
 

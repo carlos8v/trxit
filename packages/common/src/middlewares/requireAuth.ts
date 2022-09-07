@@ -17,12 +17,13 @@ declare global {
   }
 }
 
-export default expressMiddlewareAdapter(async (req) => {
-  const accessToken = req.session?.accessToken
-  if (!accessToken) return unauthorized('Usuário não autenticado')
-
+export default expressMiddlewareAdapter((req) => {  
   try {
-    const clientPayload = jwt.verify(accessToken, process.env.JWT_SECRET)
+    const authToken = req.headers['authorization']
+    if (!authToken) throw new Error('Credenciais faltando')
+
+    const [_, token] = authToken.split(' ')
+    const clientPayload = jwt.verify(token, process.env.JWT_SECRET)
     req.currentClient = clientPayload as ClientPayload
 
     return ok()

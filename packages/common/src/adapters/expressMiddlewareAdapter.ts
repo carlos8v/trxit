@@ -1,11 +1,9 @@
 import { Request, Response, NextFunction } from 'express'
 import { BAD_REQUEST, INTERNAL_SERVER_ERROR } from 'http-status'
 
-import { IHttpHelper } from '../helpers/httpHelpers'
+import { HttpController } from '../helpers/httpHelpers'
 
-type MiddlewareFn = (req: Request) => Promise<IHttpHelper> | IHttpHelper
-
-export default function (middleware: MiddlewareFn) {
+export default function (middleware: HttpController) {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       const middlewareResponse = await middleware(req)
