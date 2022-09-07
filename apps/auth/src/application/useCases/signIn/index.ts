@@ -7,6 +7,6 @@ import { signInControllerFactory } from './signInController'
 import jwt from '@application/services/jwt'
 
 const signInUseCase = signInUseCaseFactory({ individualRepository, verifyIndividualPassword })
-const signInController = signInControllerFactory({ signInUseCase, jwtSign: jwt.sign })
+const signInController = signInControllerFactory({ signInUseCase, jwtService: jwt })
 
 export default signInController

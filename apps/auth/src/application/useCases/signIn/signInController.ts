@@ -1,16 +1,21 @@
 import { ok, badRequest } from '@cube/common'
 import { SignInData, SignInControllerFactory, SignInController } from './signInDTO'
 
-export const signInControllerFactory = ({ signInUseCase, jwtSign }: SignInControllerFactory) => {
+export const signInControllerFactory = ({ signInUseCase, jwtService }: SignInControllerFactory) => {
   const signInController: SignInController = async (req) => {
     try {
       const signInData = req.body as SignInData
       const signedInIndividual = await signInUseCase(signInData)
 
-      const jwt = jwtSign({ id: signedInIndividual.id, email: signedInIndividual.email })
-      req.session = { accessToken: jwt }
+      const accessToken = jwtService.sign(
+        { id: signedInIndividual.id, email: signedInIndividual.email },
+        signedInIndividual.id
+      )
+      const refreshToken = jwtService.signRefresh({}, signedInIndividual.id)
 
-      return ok(signedInIndividual)
+      req.session = { refreshToken }
+
+      return ok({ accessToken, user: signedInIndividual })
     } catch (error: Error | any) {
       return badRequest(error?.message)
     }

@@ -1,6 +1,6 @@
 import z from 'zod'
-import { Request } from 'express'
-import { IHttpHelper } from '@cube/common'
+
+import { HttpController } from '@cube/common'
 
 import { createIndividualSchema } from '@application/useCases/createIndividual/createIndividualValidator'
 
@@ -22,4 +22,4 @@ export type CreateIndividualControllerFactory = {
   jwtSign: (payload: any) => string
 }
 
-export type CreateIndividualController = (req: Request) => Promise<IHttpHelper>
+export type CreateIndividualController = HttpController

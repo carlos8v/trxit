@@ -1,5 +1,4 @@
-import { Request } from 'express'
-import { IHttpHelper } from '@cube/common'
+import { HttpController } from '@cube/common'
 
 import { IndividualModel } from '@domain/Individual'
 import { IndividualRepository } from '@application/repositories/individualRepository'
@@ -7,6 +6,11 @@ import { IndividualRepository } from '@application/repositories/individualReposi
 export type SignInData = {
   cpf: string
   password: string
+}
+
+type JwtService = {
+  sign: (payload: any, subject: string) => string
+  signRefresh: (payload: any, subject: string) => string
 }
 
 export type SignInUseCaseFactory = {
@@ -17,6 +21,6 @@ export type SignInUseCase = (data: SignInData) => Promise<Omit<IndividualModel, 
 
 export type SignInControllerFactory = {
   signInUseCase: SignInUseCase,
-  jwtSign: (payload: any) => string
+  jwtService: JwtService
 }
-export type SignInController = (req: Request) => Promise<IHttpHelper>
+export type SignInController = HttpController
