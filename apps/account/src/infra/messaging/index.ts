@@ -13,7 +13,7 @@ const messageAdapterEvents = {
 
 export const connectMessageBroker = async () => {
   try {
-    redisMessagingAdapter.process(pingEvent.key, () => console.log('[@cube/auth]: Redis service connected'))
+    redisMessagingAdapter.process(pingEvent.key, () => console.log('[@cube/account]: Redis service connected'))
     await redisMessagingAdapter.sendMessage(pingEvent.key, { timestamps: Date.now() })
 
     Object.entries(messageAdapterEvents).forEach(([event, cb]) => {

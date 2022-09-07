@@ -22,7 +22,7 @@ export const initializeDatabaseConnection = async () => {
   try {
     if (dataSource.isInitialized) return
     await dataSource.initialize()
-    console.log('[@cube/auth]: Database connection established')
+    console.log('[@cube/account]: Database connection established')
   } catch (error) {
     console.log(error)
     console.error('Database not initialized')

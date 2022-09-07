@@ -1,5 +1,4 @@
-import { Request } from 'express'
-import { IHttpHelper } from '@cube/common'
+import { HttpController } from '@cube/common'
 
 import { AccountRepository } from '@application/repositories/accountRepository'
 
@@ -9,4 +8,4 @@ export type GetCurrentAccountUseCaseFactory = { accountRepository: AccountReposi
 export type GetCurrentAccountUseCase = (idPerson: string) => Promise<AccountModel>
 
 export type GetCurrentAccountControllerFactory = { getCurrentAccountUseCase: GetCurrentAccountUseCase }
-export type GetCurrentAccountController = (req: Request) => Promise<IHttpHelper>
+export type GetCurrentAccountController = HttpController
