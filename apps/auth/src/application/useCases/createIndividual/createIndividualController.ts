@@ -5,17 +5,23 @@ import { CreateIndividualControllerFactory, CreateIndividualController, CreateIn
 
 export const createIndividualControllerFactory = ({
   createIndividualUseCase,
-  jwtSign
+  jwtService
 }: CreateIndividualControllerFactory) => {
   const createIndividualController: CreateIndividualController = async (req: Request) => {
     try {
       const individualData = req.body as CreateIndividualData
       const newIndividual = await createIndividualUseCase(individualData)
 
-      const jwt = jwtSign({ id: newIndividual.id, email: newIndividual.email })
-      req.session = { accessToken: jwt }
+      const accessToken = jwtService.sign(
+        { id: newIndividual.id, email: newIndividual.email },
+        newIndividual.id
+      )
 
-      return created()
+      const refreshToken = jwtService.signRefresh({}, newIndividual.id)
+
+      req.session = { refreshToken }
+
+      return created({ accessToken })
     } catch (error: Error | any) {
       return badRequest(error?.message)
     }

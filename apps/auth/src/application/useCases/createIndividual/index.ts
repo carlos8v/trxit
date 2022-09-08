@@ -10,6 +10,6 @@ const createIndividualUseCase = createIndividualUseCaseFactory({
   individualRepository,
   messagingAdapter: redisMessagingAdapter
 })
-const createIndividualController = createIndividualControllerFactory({ createIndividualUseCase, jwtSign: jwt.sign })
+const createIndividualController = createIndividualControllerFactory({ createIndividualUseCase, jwtService: jwt })
 
 export default createIndividualController

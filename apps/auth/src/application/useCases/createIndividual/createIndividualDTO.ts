@@ -9,6 +9,11 @@ import { IndividualRepository } from '@application/repositories/individualReposi
 
 import { MessagingAdapter } from '@application/adapters/MessagingAdapter'
 
+type JwtService = {
+  sign: (payload: any, subject: string) => string
+  signRefresh: (payload: any, subject: string) => string
+}
+
 export type CreateIndividualData = z.infer<typeof createIndividualSchema>
 
 export type CreateIndividualUseCaseFactory = {
@@ -19,7 +24,7 @@ export type CreateIndividualUseCase = (individualData: CreateIndividualData) => 
 
 export type CreateIndividualControllerFactory = {
   createIndividualUseCase: CreateIndividualUseCase,
-  jwtSign: (payload: any) => string
+  jwtService: JwtService
 }
 
 export type CreateIndividualController = HttpController
