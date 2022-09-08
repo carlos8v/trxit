@@ -22,11 +22,10 @@ const createTransferHash = (transfer: TransferModel) => createHash('SHA256')
 export const signTransfer = (transfer: TransferModel, privateKey: KeyLike): TransferModel => {
   const hash = createTransferHash(transfer)
 
-  const sign = createSign('SHA256')
-  sign.write(hash)
-  sign.end()
+  const signer = createSign('rsa-sha256')
+  signer.update(hash)
 
-  transfer.signature = sign.sign(privateKey, 'hex')
+  transfer.signature = signer.sign(privateKey, 'hex')
 
   return transfer
 }
@@ -36,9 +35,8 @@ export const verifyTransfer = (transfer: TransferModel, publicKey: KeyLike): boo
 
   const hash = createTransferHash(transfer)
 
-  const verify = createVerify('SHA256')
-  verify.write(hash)
-  verify.end()
+  const verifier = createVerify('rsa-sha256')
+  verifier.update(hash)
 
-  return verify.verify(publicKey, transfer.signature, 'hex')
+  return verifier.verify(publicKey, transfer.signature, 'hex')
 }
