@@ -1,9 +1,20 @@
 import type { IndividualCreatedPayload } from '@cube/common'
 
 import { AccountModel } from '@domain/Account'
-import { AccountRepository } from '../../repositories/accountRepository'
+import { WalletModel } from '@domain/Wallet'
+
+import { AccountRepository } from '@application/repositories/accountRepository'
+import { WalletRepository } from '@application/repositories/walletRepository'
 
 export type CreateAccountData = IndividualCreatedPayload
 
-export type CreateAccountUseCaseFactory = { accountRepository: AccountRepository }
-export type CreateAccountUseCase = (accountData: CreateAccountData) => Promise<AccountModel>
+export type CreateAccountResponse = {
+  account: AccountModel
+  wallet: WalletModel
+}
+
+export type CreateAccountUseCaseFactory = {
+  accountRepository: AccountRepository
+  walletRepository: WalletRepository
+}
+export type CreateAccountUseCase = (accountData: CreateAccountData) => Promise<CreateAccountResponse>
