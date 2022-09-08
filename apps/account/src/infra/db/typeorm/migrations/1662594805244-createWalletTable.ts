@@ -8,14 +8,14 @@ export class createWalletTable1662594805244 implements MigrationInterface {
         {
           name: 'public_key',
           type: 'varchar',
-          length: '174',
+          length: '120',
           isPrimary: true,
           isNullable: false
         },
         {
           name: 'private_key',
           type: 'varchar',
-          length: '237',
+          length: '180',
           isNullable: false
         },
         {

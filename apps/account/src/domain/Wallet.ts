@@ -30,8 +30,8 @@ export const Wallet = (walletData: CreateWalletData): WalletModel => {
 
   if (!publicKey || !privateKey) {
     const newKeys = generateKeyPairSync('ec', { namedCurve: 'secp256k1' })
-    publicKey = newKeys.publicKey.export({ format: 'pem', type: 'spki' }).toString()
-    privateKey = newKeys.privateKey.export({ format: 'pem', type: 'pkcs8' }).toString()
+    publicKey = newKeys.publicKey.export({ format: 'der', type: 'spki' }).toString('base64')
+    privateKey = newKeys.privateKey.export({ format: 'der', type: 'pkcs8' }).toString('base64')
   }
 
   return {
