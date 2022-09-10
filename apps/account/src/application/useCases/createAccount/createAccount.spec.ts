@@ -1,5 +1,7 @@
 import { randomUUID } from 'crypto'
 
+import { describe, it, expect, vi } from 'vitest'
+
 import { InMemoryAccountRepositoryFactory } from '@tests/repositories/inMemoryAccountRepository'
 import { InMemoryWalletRepositoryFactory } from '@tests/repositories/inMemoryWalletRepository'
 
@@ -20,8 +22,8 @@ describe('[@cube/account]: Create Account UseCase', () => {
     const inMemoryAccountRepository = InMemoryAccountRepositoryFactory()
     const InMemoryWalletRepository = InMemoryWalletRepositoryFactory()
 
-    const repositoryCreateAccountFn = jest.spyOn(inMemoryAccountRepository, 'save')
-    const repositoryCreateWalletFn = jest.spyOn(InMemoryWalletRepository, 'save')
+    const repositoryCreateAccountFn = vi.spyOn(inMemoryAccountRepository, 'save')
+    const repositoryCreateWalletFn = vi.spyOn(InMemoryWalletRepository, 'save')
 
     const newIndividualCreated = makeSut()
     const createAccountUseCase = createAccountUseCaseFactory({
@@ -75,8 +77,8 @@ describe('[@cube/account]: Create Account UseCase', () => {
       walletRepository: InMemoryWalletRepository
     })
 
-    const repositoryCreateAccountFn = jest.spyOn(inMemoryAccountRepository, 'save')
-    const repositoryCreateWalletFn = jest.spyOn(InMemoryWalletRepository, 'save')
+    const repositoryCreateAccountFn = vi.spyOn(inMemoryAccountRepository, 'save')
+    const repositoryCreateWalletFn = vi.spyOn(InMemoryWalletRepository, 'save')
 
     await expect(createAccountUseCase(mockedAccountData)).rejects.toThrowError()
     expect(repositoryCreateAccountFn).not.toBeCalled()
