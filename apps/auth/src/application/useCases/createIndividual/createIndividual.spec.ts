@@ -1,3 +1,5 @@
+import { describe, it, expect } from 'vitest'
+
 import { InMemoryIndividualRepositoryFactory } from '@tests/inMemoryIndividualRepository'
 
 import { Individual } from '@domain/Individual'

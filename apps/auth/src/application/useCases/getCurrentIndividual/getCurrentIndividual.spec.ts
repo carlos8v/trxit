@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto'
+import { describe, it, expect } from 'vitest'
 
 import { IndividualModel } from '@domain/Individual'
 

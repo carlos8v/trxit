@@ -1,3 +1,5 @@
+import { describe, it, expect } from 'vitest'
+
 import { Individual, CreateIndividualModel } from '@domain/Individual'
 
 import { InMemoryIndividualRepositoryFactory } from '@tests/inMemoryIndividualRepository'
