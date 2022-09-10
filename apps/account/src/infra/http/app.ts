@@ -16,6 +16,6 @@ app.use(cookie({
 
 app.use(express.json())
 
-app.use(requireAuth)
+app.use(requireAuth('@cube/account'))
 
 setupRoutes(app)
