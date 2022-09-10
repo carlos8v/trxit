@@ -1,13 +1,13 @@
-import { GetCurrentIndividualUseCaseFactory, GetCurrentIndividualUseCase } from './getCurrentIndividualDTO'
+import { GetCurrentIndividualUseCaseFactory } from './getCurrentIndividualDTO'
 
-export const getCurrentIndividualUseCaseFactory = ({ individualRepository }: GetCurrentIndividualUseCaseFactory) => {
-  const getCurrentIndividualUseCase: GetCurrentIndividualUseCase = async (id: string) => {
+export const getCurrentIndividualUseCaseFactory: GetCurrentIndividualUseCaseFactory = ({
+  individualRepository
+}) => {
+  return async (id: string) => {
     const currentIndividual = await individualRepository.findById(id)
     if (!currentIndividual?.id) throw new Error('Usuário não encontrado')
 
     const { password, ...safeIndividual } = currentIndividual
     return safeIndividual
   }
-
-  return getCurrentIndividualUseCase
 }

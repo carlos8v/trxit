@@ -1,10 +1,10 @@
-import { HttpController } from '@cube/common'
-
 import { IndividualModel } from '@domain/Individual'
 import { IndividualRepository } from '@application/repositories/individualRepository'
 
-export type GetCurrentIndividualUseCaseFactory = { individualRepository: IndividualRepository }
-export type GetCurrentIndividualUseCase = (id: string) => Promise<Omit<IndividualModel, 'password'>>
+type GetCurrentIndividualResponse = Omit<IndividualModel, 'password'>
 
-export type GetCurrentIndividualControllerFactory = { getCurrentIndividualUseCase: GetCurrentIndividualUseCase }
-export type GetCurrentIndividualController = HttpController
+export type GetCurrentIndividualUseCaseFactory = (data: {
+  individualRepository: IndividualRepository
+}) => GetCurrentIndividualUseCase
+
+export type GetCurrentIndividualUseCase = (id: string) => Promise<GetCurrentIndividualResponse>

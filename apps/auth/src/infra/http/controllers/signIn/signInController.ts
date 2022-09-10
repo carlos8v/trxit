@@ -1,8 +1,12 @@
 import { ok, badRequest } from '@cube/common'
-import { SignInData, SignInControllerFactory, SignInController } from './signInDTO'
 
-export const signInControllerFactory = ({ signInUseCase, jwtService }: SignInControllerFactory) => {
-  const signInController: SignInController = async (req) => {
+import { SignInData, SignInControllerFactory } from './signInDTO'
+
+export const signInControllerFactory: SignInControllerFactory = ({
+  signInUseCase,
+  jwtService
+}) => {
+  return async (req) => {
     try {
       const signInData = req.body as SignInData
       const signedInIndividual = await signInUseCase(signInData)
@@ -20,6 +24,4 @@ export const signInControllerFactory = ({ signInUseCase, jwtService }: SignInCon
       return badRequest(error?.message)
     }
   }
-
-  return signInController
 }

@@ -1,10 +1,10 @@
-import { RefreshSessionController, RefreshSessionControllerFactory } from './refreshSessionDTO'
+import { RefreshSessionControllerFactory } from './refreshSessionDTO'
 
 import { badRequest, ok, unauthorized } from '@cube/common'
 
-export const refreshSessionControllerFactory = (
-  { refreshSessionUseCase }: RefreshSessionControllerFactory
-): RefreshSessionController => {
+export const refreshSessionControllerFactory: RefreshSessionControllerFactory = ({
+  refreshSessionUseCase
+}) => {
   return async (req) => {
     try {
       const { refreshToken: clientRefreshToken } = req.session || {}

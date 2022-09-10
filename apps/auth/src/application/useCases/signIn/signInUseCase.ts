@@ -1,6 +1,10 @@
 import { SignInUseCase, SignInUseCaseFactory } from './signInDTO'
 
-export const signInUseCaseFactory = ({ individualRepository, verifyIndividualPassword }: SignInUseCaseFactory) => {
+import { verifyIndividualPassword } from '@domain/Individual'
+
+export const signInUseCaseFactory: SignInUseCaseFactory = ({
+  individualRepository
+}) => {
   const signInUseCase: SignInUseCase = async ({ cpf, password }) => {
     const individualExists = await individualRepository.findByCPF(cpf)
     if (!individualExists || !individualExists.id) throw new Error('Usuário não encontrado')

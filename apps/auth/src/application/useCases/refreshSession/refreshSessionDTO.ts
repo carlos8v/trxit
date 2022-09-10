@@ -1,5 +1,4 @@
 import { JwtPayload } from 'jsonwebtoken'
-import { HttpController } from '@cube/common'
 
 import { IndividualRepository } from '@application/repositories/individualRepository'
 
@@ -9,14 +8,12 @@ type jwtService = {
   signRefresh: (payload: any, subject: string) => string
 }
 
-export type RefreshSessionUseCaseFactory = {
+export type RefreshSessionUseCaseFactory = (data: {
   jwtService: jwtService
   individualRepository: IndividualRepository
-}
+}) => RefreshSessionUseCase
+
 export type RefreshSessionUseCase = (refreshToken: string) => Promise<{
   accessToken: string
   refreshToken: string
 }>
-
-export type RefreshSessionControllerFactory = { refreshSessionUseCase: RefreshSessionUseCase }
-export type RefreshSessionController = HttpController

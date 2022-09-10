@@ -1,20 +1,34 @@
 import { Router } from 'express'
-import { expressRouteAdapter, requireAuth } from '@cube/common'
+
+import { expressMiddlewareAdapter, expressRouteAdapter, requireAuth } from '@cube/common'
 
 const authRouter = Router()
 
-import getCurrentIndividualController from '@application/useCases/getCurrentIndividual'
+import { getCurrentIndividualController } from '../controllers/getCurrentIndividual'
+import { signInController, signInMiddleware } from '../controllers/signIn'
+import { signOutController } from '@infra/http/controllers/signOut'
+import { refreshSessionController } from '../controllers/refreshSession'
 
-import signInController from '@application/useCases/signIn'
-import signInIndividualMiddleware from '../middlewares/signInIndividualMiddleware'
+authRouter.get(
+  '/me',
+  requireAuth,
+  expressRouteAdapter(getCurrentIndividualController)
+)
 
-import signOutController from '@application/useCases/signOut'
+authRouter.post(
+  '/login',
+  expressMiddlewareAdapter(signInMiddleware),
+  expressRouteAdapter(signInController)
+)
 
-import { refreshSessionController } from '@application/useCases/refreshSession'
+authRouter.post(
+  '/logout',
+  expressRouteAdapter(signOutController)
+)
 
-authRouter.get('/me', requireAuth, expressRouteAdapter(getCurrentIndividualController))
-authRouter.post('/login', signInIndividualMiddleware, expressRouteAdapter(signInController))
-authRouter.post('/logout', expressRouteAdapter(signOutController))
-authRouter.post('/refresh-session', expressRouteAdapter(refreshSessionController))
+authRouter.post(
+  '/refresh-session',
+  expressRouteAdapter(refreshSessionController)
+)
 
 export default authRouter

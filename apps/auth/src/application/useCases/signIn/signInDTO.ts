@@ -1,6 +1,5 @@
-import { HttpController } from '@cube/common'
-
 import { IndividualModel } from '@domain/Individual'
+
 import { IndividualRepository } from '@application/repositories/individualRepository'
 
 export type SignInData = {
@@ -8,19 +7,8 @@ export type SignInData = {
   password: string
 }
 
-type JwtService = {
-  sign: (payload: any, subject: string) => string
-  signRefresh: (payload: any, subject: string) => string
-}
-
-export type SignInUseCaseFactory = {
+export type SignInUseCaseFactory = (data: {
   individualRepository: IndividualRepository
-  verifyIndividualPassword: (pass: string, IndividualPass: string) => Promise<boolean>
-}
-export type SignInUseCase = (data: SignInData) => Promise<Omit<IndividualModel, 'password'>>
+}) => SignInUseCase
 
-export type SignInControllerFactory = {
-  signInUseCase: SignInUseCase,
-  jwtService: JwtService
-}
-export type SignInController = HttpController
+export type SignInUseCase = (data: SignInData) => Promise<Omit<IndividualModel, 'password'>>

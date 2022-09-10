@@ -1,9 +1,9 @@
-import { RefreshSessionUseCase, RefreshSessionUseCaseFactory } from './refreshSessionDTO'
+import { RefreshSessionUseCaseFactory } from './refreshSessionDTO'
 
-export const refreshSessionUseCaseFactory = ({
+export const refreshSessionUseCaseFactory: RefreshSessionUseCaseFactory = ({
   jwtService,
   individualRepository
-}: RefreshSessionUseCaseFactory): RefreshSessionUseCase => {
+}) => {
   return async (token) => {
     const isValidToken = jwtService.verify(token)
     if (

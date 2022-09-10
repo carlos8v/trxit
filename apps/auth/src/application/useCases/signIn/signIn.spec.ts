@@ -1,4 +1,4 @@
-import { Individual, CreateIndividualModel, verifyIndividualPassword } from '@domain/Individual'
+import { Individual, CreateIndividualModel } from '@domain/Individual'
 
 import { InMemoryIndividualRepositoryFactory } from '@tests/inMemoryIndividualRepository'
 
@@ -21,8 +21,7 @@ describe('[@cube/auth]: Sign in Individual UseCase', () => {
     inMemoryIndividualRepository.create(mockedNewIndividual)
 
     const signInUseCase = signInUseCaseFactory({
-      individualRepository: inMemoryIndividualRepository,
-      verifyIndividualPassword: verifyIndividualPassword
+      individualRepository: inMemoryIndividualRepository
     })
 
     const response = await signInUseCase({ cpf: mockedNewIndividual.cpf, password: mockedIndividualData.password })
@@ -35,8 +34,7 @@ describe('[@cube/auth]: Sign in Individual UseCase', () => {
     const inMemoryIndividualRepository = InMemoryIndividualRepositoryFactory()
 
     const signInUseCase = signInUseCaseFactory({
-      individualRepository: inMemoryIndividualRepository,
-      verifyIndividualPassword: verifyIndividualPassword
+      individualRepository: inMemoryIndividualRepository
     })
 
     const IndividualPayload: SignInData = {

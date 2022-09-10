@@ -1,13 +1,13 @@
 import { Request } from 'express'
 import { created, badRequest } from '@cube/common'
 
-import { CreateIndividualControllerFactory, CreateIndividualController, CreateIndividualData } from './createIndividualDTO'
+import { CreateIndividualControllerFactory, CreateIndividualData } from './createIndividualDTO'
 
-export const createIndividualControllerFactory = ({
+export const createIndividualControllerFactory: CreateIndividualControllerFactory = ({
   createIndividualUseCase,
   jwtService
-}: CreateIndividualControllerFactory) => {
-  const createIndividualController: CreateIndividualController = async (req: Request) => {
+}) => {
+  return async (req: Request) => {
     try {
       const individualData = req.body as CreateIndividualData
       const newIndividual = await createIndividualUseCase(individualData)
@@ -26,6 +26,4 @@ export const createIndividualControllerFactory = ({
       return badRequest(error?.message)
     }
   }
-
-  return createIndividualController
 }

@@ -1,4 +1,5 @@
 import z from 'zod'
+
 import { validateCPF } from 'validations-br'
 
 export const signInSchema = z.object({
