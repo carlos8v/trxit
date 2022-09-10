@@ -11,7 +11,7 @@ import { refreshSessionController } from '../controllers/refreshSession'
 
 authRouter.get(
   '/me',
-  requireAuth,
+  requireAuth('@cube/auth'),
   expressRouteAdapter(getCurrentIndividualController)
 )
 

@@ -1,21 +1,25 @@
-import jwt, { SignOptions } from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import { jwtExpireTime } from '@cube/common'
 
-const JWT_SECRET = process.env.JWT_SECRET!
+const JWT_PUBLIC = Buffer.from(process.env.JWT_PUBLIC_KEY!, 'base64')
+const JWT_SECRET = Buffer.from(process.env.JWT_SECRET_KEY!, 'base64')
 
-const jwtTokenOptions: SignOptions = {
-  expiresIn: jwtExpireTime.accessToken.formated
-}
+const jwtTokenExpires = jwtExpireTime.accessToken.formated
+const jwtRefreshExpires = jwtExpireTime.refreshToken.formated
 
-const jwtRefreshTokenOptions: SignOptions = {
-  expiresIn: jwtExpireTime.refreshToken.formated
-}
+const audienceServices = [
+  '@cube/auth',
+  '@cube/account'
+]
 
 const sign = (payload: any, subject: string) => jwt.sign(
   payload,
   JWT_SECRET,
   {
-    ...jwtTokenOptions,
+    expiresIn: jwtTokenExpires,
+    algorithm: 'RS256',
+    issuer: '@cube/auth',
+    audience: audienceServices,
     subject
   }
 )
@@ -24,15 +28,21 @@ const signRefresh = (payload: any, subject: string) => jwt.sign(
   payload,
   JWT_SECRET,
   {
-    ...jwtRefreshTokenOptions,
+    expiresIn: jwtRefreshExpires,
+    algorithm: 'RS256',
+    issuer: '@cube/auth',
+    audience: audienceServices,
     subject
   }
 )
 
 const verify = (accessToken: string) => jwt.verify(
   accessToken,
-  JWT_SECRET,
-  { algorithms: ['HS256'] }
+  JWT_PUBLIC,
+  {
+    algorithms: ['HS256'],
+    issuer: '@cube/auth'
+  }
 )
 
 export default {
