@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { expressRouteAdapter } from '@cube/common'
 
-import { getCurrentAccountController } from '@application/useCases/getCurrentAccount'
+import { getCurrentAccountController } from '../controllers/getCurrentAccount'
 
 const accountRouter = Router()
 
