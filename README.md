@@ -5,11 +5,11 @@ Conta digital
 
 ### Requisitos
 
-- Criar uma conta
-- Logar em uma conta
-- Ver o saldo
-- Ver extrato
-- Transferir dinheiro para outra conta
+- [x] Criar uma conta
+- [x] Logar em uma conta
+- [ ] Ver o saldo
+- [ ] Ver extrato
+- [ ] Transferir dinheiro para outra conta
 
 ## Serviços
 
