@@ -9,6 +9,12 @@ const save: WalletRepository['save'] = async (wallet) => {
   walletRepository.save(wallet)
 }
 
+const findByOwnerId: WalletRepository['findByOwnerId'] = async (ownerId) => {
+  const wallets = walletRepository.findBy({ ownerId })
+  return wallets
+}
+
 export const typeormWalletRepository: WalletRepository = {
-  save
+  save,
+  findByOwnerId
 }

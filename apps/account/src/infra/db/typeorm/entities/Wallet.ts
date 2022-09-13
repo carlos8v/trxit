@@ -29,7 +29,7 @@ export class Wallet {
     precision: 12,
     scale: 2
   })
-  balance: Number
+  balance: number
 
   @Column({
     type: 'varchar',

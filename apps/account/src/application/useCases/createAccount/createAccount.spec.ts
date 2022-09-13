@@ -1,14 +1,15 @@
 import { randomUUID } from 'crypto'
 
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 
-import { InMemoryAccountRepositoryFactory } from '@tests/repositories/inMemoryAccountRepository'
-import { InMemoryWalletRepositoryFactory } from '@tests/repositories/inMemoryWalletRepository'
+import { InMemoryAccountRepositoryFactory } from '@tests/db/repositories/inMemoryAccountRepository'
+import { InMemoryWalletRepositoryFactory } from '@tests/db/repositories/inMemoryWalletRepository'
 
 import { Account } from '@domain/Account'
 
 import { CreateAccountData } from './createAccountDTO'
 import { createAccountUseCaseFactory } from './createAccountUseCase'
+import { inMemoryDatabaseFactory } from '@tests/db/repositories/inMemoryDatabase'
 
 const makeSut = (): CreateAccountData => ({
   id: randomUUID(),
@@ -18,18 +19,25 @@ const makeSut = (): CreateAccountData => ({
 })
 
 describe('[@trxit/account]: Create Account UseCase', () => {
-  it('Should create account normally', async () => {
-    const inMemoryAccountRepository = InMemoryAccountRepositoryFactory()
-    const InMemoryWalletRepository = InMemoryWalletRepositoryFactory()
+  const inMemoryDatabase = inMemoryDatabaseFactory()
+  const inMemoryAccountRepository = InMemoryAccountRepositoryFactory(inMemoryDatabase)
+  const InMemoryWalletRepository = InMemoryWalletRepositoryFactory(inMemoryDatabase)
 
+  const createAccountUseCase = createAccountUseCaseFactory({
+    accountRepository: inMemoryAccountRepository,
+    walletRepository: InMemoryWalletRepository
+  })
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+    inMemoryDatabase.truncate()
+  })
+
+  it('Should create account normally', async () => {
     const repositoryCreateAccountFn = vi.spyOn(inMemoryAccountRepository, 'save')
     const repositoryCreateWalletFn = vi.spyOn(InMemoryWalletRepository, 'save')
 
     const newIndividualCreated = makeSut()
-    const createAccountUseCase = createAccountUseCaseFactory({
-      accountRepository: inMemoryAccountRepository,
-      walletRepository: InMemoryWalletRepository
-    })
 
     const response = await createAccountUseCase(newIndividualCreated)
 
@@ -67,15 +75,7 @@ describe('[@trxit/account]: Create Account UseCase', () => {
       username: 'fulano.tal'
     })
 
-    const inMemoryAccountRepository = InMemoryAccountRepositoryFactory()
-    const InMemoryWalletRepository = InMemoryWalletRepositoryFactory()
-
     inMemoryAccountRepository.save(mockedAccount)
-
-    const createAccountUseCase = createAccountUseCaseFactory({
-      accountRepository: inMemoryAccountRepository,
-      walletRepository: InMemoryWalletRepository
-    })
 
     const repositoryCreateAccountFn = vi.spyOn(inMemoryAccountRepository, 'save')
     const repositoryCreateWalletFn = vi.spyOn(InMemoryWalletRepository, 'save')
