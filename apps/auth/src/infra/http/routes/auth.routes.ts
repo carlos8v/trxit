@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { expressMiddlewareAdapter, expressRouteAdapter, requireAuth } from '@cube/common'
+import { expressMiddlewareAdapter, expressRouteAdapter, requireAuth } from '@trxit/common'
 
 const authRouter = Router()
 
@@ -11,7 +11,7 @@ import { refreshSessionController } from '../controllers/refreshSession'
 
 authRouter.get(
   '/me',
-  requireAuth('@cube/auth'),
+  requireAuth('@trxit/auth'),
   expressRouteAdapter(getCurrentIndividualController)
 )
 

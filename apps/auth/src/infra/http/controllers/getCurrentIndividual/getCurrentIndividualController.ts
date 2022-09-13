@@ -1,4 +1,4 @@
-import { ok, badRequest, unauthorized } from '@cube/common'
+import { ok, badRequest, unauthorized } from '@trxit/common'
 
 import { GetCurrentIndividualControllerFactory } from './getCurrentIndividualDTO'
 

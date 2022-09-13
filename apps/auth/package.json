@@ -1,7 +1,7 @@
 {
-  "name": "@cube/auth",
+  "name": "@trxit/auth",
   "version": "0.1.0",
-  "description": "Auth service of cube app",
+  "description": "Auth service of trxit app",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/infra/http/server.ts",
     "test": "vitest",

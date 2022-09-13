@@ -1,4 +1,4 @@
-import { HttpController } from '@cube/common'
+import { HttpController } from '@trxit/common'
 
 import { RefreshSessionUseCase } from '@application/useCases/refreshSession/refreshSessionDTO'
 

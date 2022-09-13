@@ -1,7 +1,7 @@
 import express from 'express'
 import cookie from 'cookie-session'
 
-import { requireAuth } from '@cube/common'
+import { requireAuth } from '@trxit/common'
 
 import { setupRoutes } from './routes'
 
@@ -16,6 +16,6 @@ app.use(cookie({
 
 app.use(express.json())
 
-app.use(requireAuth('@cube/account'))
+app.use(requireAuth('@trxit/account'))
 
 setupRoutes(app)

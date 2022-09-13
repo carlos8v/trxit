@@ -1,6 +1,6 @@
 import { Request } from 'express'
 
-import { ok, unprocessableEntity } from '@cube/common'
+import { ok, unprocessableEntity } from '@trxit/common'
 
 import { CreateIndividualMiddlewareFactory } from './createIndividualDTO'
 

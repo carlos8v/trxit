@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { expressMiddlewareAdapter, expressRouteAdapter } from '@cube/common'
+import { expressMiddlewareAdapter, expressRouteAdapter } from '@trxit/common'
 
 import { createIndividualController, createIndividualMiddleware } from '../controllers/createIndividual'
 

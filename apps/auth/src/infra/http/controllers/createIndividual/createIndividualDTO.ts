@@ -1,6 +1,6 @@
 import { ZodSchema } from 'zod'
 
-import { HttpController } from '@cube/common'
+import { HttpController } from '@trxit/common'
 
 import { CreateIndividualUseCase } from '@application/useCases/createIndividual/createIndividualDTO'
 export { CreateIndividualData } from '@application/useCases/createIndividual/createIndividualDTO'

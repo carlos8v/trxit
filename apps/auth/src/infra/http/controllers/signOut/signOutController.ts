@@ -1,4 +1,4 @@
-import { ok } from '@cube/common'
+import { ok } from '@trxit/common'
 
 import { SignOutControllerFactory } from './signOutDTO'
 

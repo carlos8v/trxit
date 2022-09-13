@@ -1,6 +1,6 @@
 import { ZodSchema } from 'zod'
 
-import { HttpController } from '@cube/common'
+import { HttpController } from '@trxit/common'
 
 import { SignInUseCase } from '@application/useCases/signIn/signInDTO'
 export { SignInData } from '@application/useCases/signIn/signInDTO'

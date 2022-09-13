@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { jwtExpireTime } from '@cube/common'
+import { jwtExpireTime } from '@trxit/common'
 
 const JWT_PUBLIC = Buffer.from(process.env.JWT_PUBLIC_KEY!, 'base64')
 const JWT_SECRET = Buffer.from(process.env.JWT_SECRET_KEY!, 'base64')
@@ -8,8 +8,8 @@ const jwtTokenExpires = jwtExpireTime.accessToken.formated
 const jwtRefreshExpires = jwtExpireTime.refreshToken.formated
 
 const audienceServices = [
-  '@cube/auth',
-  '@cube/account'
+  '@trxit/auth',
+  '@trxit/account'
 ]
 
 const sign = (payload: any, subject: string) => jwt.sign(
@@ -18,7 +18,7 @@ const sign = (payload: any, subject: string) => jwt.sign(
   {
     expiresIn: jwtTokenExpires,
     algorithm: 'RS256',
-    issuer: '@cube/auth',
+    issuer: '@trxit/auth',
     audience: audienceServices,
     subject
   }
@@ -30,7 +30,7 @@ const signRefresh = (payload: any, subject: string) => jwt.sign(
   {
     expiresIn: jwtRefreshExpires,
     algorithm: 'RS256',
-    issuer: '@cube/auth',
+    issuer: '@trxit/auth',
     audience: audienceServices,
     subject
   }
@@ -41,7 +41,7 @@ const verify = (accessToken: string) => jwt.verify(
   JWT_PUBLIC,
   {
     algorithms: ['HS256'],
-    issuer: '@cube/auth'
+    issuer: '@trxit/auth'
   }
 )
 

@@ -20,7 +20,7 @@ const mockedMessagingAdapter: MessagingAdapter = {
   process: async () => Promise.resolve()
 }
 
-describe('[@cube/auth]: Create Individual UseCase', () => {
+describe('[@trxit/auth]: Create Individual UseCase', () => {
   it('Should create Individual correctly', async () => {
     const inMemoryIndividualRepository = InMemoryIndividualRepositoryFactory()
 

@@ -16,7 +16,7 @@ async function start() {
   await connectMessageBroker()
 
   app.listen(process.env.PORT, () => {
-    console.log(`[@cube/account]: Service started at port ${process.env.PORT}`)
+    console.log(`[@trxit/account]: Service started at port ${process.env.PORT}`)
   })
 
   const signalTraps = ['SIGTERM', 'SIGINT', 'SIGUSR2']

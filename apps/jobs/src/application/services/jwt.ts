@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { jwtExpireTime } from '@cube/common'
+import { jwtExpireTime } from '@trxit/common'
 
 const JWT_SECRET = process.env.JWT_SECRET!
 
@@ -10,8 +10,8 @@ const sign = (payload: any) => jwt.sign(
   JWT_SECRET,
   {
     expiresIn: jwtTokenExpires,
-    issuer: '@cube/jobs',
-    audience: '@cube/jobs'
+    issuer: '@trxit/jobs',
+    audience: '@trxit/jobs'
   }
 )
 
@@ -20,8 +20,8 @@ const verify = (accessToken: string) => jwt.verify(
   JWT_SECRET,
   {
     algorithms: ['HS256'],
-    issuer: '@cube/jobs',
-    audience: '@cube/jobs'
+    issuer: '@trxit/jobs',
+    audience: '@trxit/jobs'
   }
 )
 

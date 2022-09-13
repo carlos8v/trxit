@@ -1,6 +1,6 @@
 import { queues, client, subscriber } from './redis/bull'
 
-import { events } from '@cube/common'
+import { events } from '@trxit/common'
 
 import pingEvent from './redis/events/ping'
 import { redisMessagingAdapter } from './redis/adapters/redisMessageAdapter'
@@ -13,7 +13,7 @@ const messageAdapterEvents = {
 
 export const connectMessageBroker = async () => {
   try {
-    redisMessagingAdapter.process(pingEvent.key, () => console.log('[@cube/account]: Redis service connected'))
+    redisMessagingAdapter.process(pingEvent.key, () => console.log('[@trxit/account]: Redis service connected'))
     await redisMessagingAdapter.sendMessage(pingEvent.key, { timestamps: Date.now() })
 
     Object.entries(messageAdapterEvents).forEach(([event, cb]) => {

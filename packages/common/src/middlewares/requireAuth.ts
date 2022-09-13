@@ -27,7 +27,7 @@ export default (audience: string | string[]) => expressMiddlewareAdapter((req) =
     const publicKey = Buffer.from(process.env.JWT_PUBLIC_KEY, 'base64')
     const clientPayload = jwt.verify(token, publicKey, {
       algorithms: ['RS256'],
-      issuer: '@cube/auth',
+      issuer: '@trxit/auth',
       audience: audience
     })
 

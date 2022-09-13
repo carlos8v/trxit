@@ -1,5 +1,5 @@
 {
-  "name": "@cube/common",
+  "name": "@trxit/common",
   "version": "0.1.0",
   "description": "Package of common adapters and helpers",
   "private": false,

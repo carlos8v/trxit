@@ -1,3 +1,3 @@
-import { HttpController } from '@cube/common'
+import { HttpController } from '@trxit/common'
 
 export type SignOutControllerFactory = () => HttpController

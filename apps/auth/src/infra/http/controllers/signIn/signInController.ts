@@ -1,4 +1,4 @@
-import { ok, badRequest } from '@cube/common'
+import { ok, badRequest } from '@trxit/common'
 
 import { SignInData, SignInControllerFactory } from './signInDTO'
 

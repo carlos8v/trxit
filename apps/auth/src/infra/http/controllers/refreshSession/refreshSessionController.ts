@@ -1,6 +1,6 @@
 import { RefreshSessionControllerFactory } from './refreshSessionDTO'
 
-import { badRequest, ok, unauthorized } from '@cube/common'
+import { badRequest, ok, unauthorized } from '@trxit/common'
 
 export const refreshSessionControllerFactory: RefreshSessionControllerFactory = ({
   refreshSessionUseCase

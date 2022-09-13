@@ -1,27 +1,27 @@
 version: '3'
 services:
   auth-db:
-    container_name: cube-auth-db
+    container_name: trxit-auth-db
     image: postgres
     ports:
       - 5433:5432
     environment:
-      POSTGRES_USER: cube-auth
-      POSTGRES_PASSWORD: cube-auth
-      POSTGRES_DB: cube-auth
+      POSTGRES_USER: trxit-auth
+      POSTGRES_PASSWORD: trxit-auth
+      POSTGRES_DB: trxit-auth
 
   account-db:
-    container_name: cube-account-db
+    container_name: trxit-account-db
     image: postgres
     ports:
       - 5434:5432
     environment:
-      POSTGRES_USER: cube-account
-      POSTGRES_PASSWORD: cube-account
-      POSTGRES_DB: cube-account
+      POSTGRES_USER: trxit-account
+      POSTGRES_PASSWORD: trxit-account
+      POSTGRES_DB: trxit-account
 
   redis:
-    container_name: cube-redis
+    container_name: trxit-redis
     image: redis
     ports:
       - 6379:6379

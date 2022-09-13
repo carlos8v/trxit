@@ -1,4 +1,4 @@
-import { HttpController } from '@cube/common'
+import { HttpController } from '@trxit/common'
 
 import { GetCurrentAccountUseCase } from '@application/useCases/getCurrentAccount/getCurrentAccountDTO'
 

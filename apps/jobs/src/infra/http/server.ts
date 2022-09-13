@@ -3,7 +3,7 @@ import { app } from './app'
 import { disconnect } from '../messaging'
 
 let server = app.listen(process.env.PORT, () => {
-  console.log(`[@cube/jobs]: Service started at port ${process.env.PORT}`)
+  console.log(`[@trxit/jobs]: Service started at port ${process.env.PORT}`)
 })
 
 const gracefulShutdown = async (e: any) => {

@@ -1,40 +1,40 @@
 version: '3'
 services:
   auth:
-    container_name: cube-auth
+    container_name: trxit-auth
     build:
       context: ./apps/auth
       args:
         - PORT=80
-    image: cube/auth
+    image: trxit/auth
     env_file:
       - './apps/auth/.env'
 
   account:
-    container_name: cube-account
+    container_name: trxit-account
     build:
       context: ./apps/account
       args:
         - PORT=80
-    image: cube/account
+    image: trxit/account
     env_file:
       - './apps/account/.env'
 
   jobs:
-    container_name: cube-jobs
+    container_name: trxit-jobs
     build:
       context: ./apps/jobs
       args:
         - PORT=80
-    image: cube/jobs
+    image: trxit/jobs
     env_file:
       - './apps/jobs/.env'
 
   proxy:
-    container_name: cube-proxy
+    container_name: trxit-proxy
     build:
       context: ./apps/proxy
-    image: cube/proxy
+    image: trxit/proxy
     ports:
       - 80:80
     depends_on:

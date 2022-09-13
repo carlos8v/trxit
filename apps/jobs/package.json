@@ -1,5 +1,5 @@
 {
-  "name": "@cube/jobs",
+  "name": "@trxit/jobs",
   "version": "0.1.0",
   "description": "Message broker visualizer",
   "scripts": {

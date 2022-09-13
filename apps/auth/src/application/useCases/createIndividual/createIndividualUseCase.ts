@@ -1,7 +1,7 @@
 import { Individual } from '@domain/Individual'
 
-import { events } from '@cube/common'
-import type { IndividualCreatedPayload } from '@cube/common'
+import { events } from '@trxit/common'
+import type { IndividualCreatedPayload } from '@trxit/common'
 
 import { CreateIndividualUseCase, CreateIndividualUseCaseFactory } from './createIndividualDTO'
 

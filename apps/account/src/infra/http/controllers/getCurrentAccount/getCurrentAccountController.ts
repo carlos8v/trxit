@@ -1,4 +1,4 @@
-import { badRequest, notFound, ok } from '@cube/common'
+import { badRequest, notFound, ok } from '@trxit/common'
 
 import { GetCurrentAccountControllerFactory } from './getCurrentAccountDTO'
 

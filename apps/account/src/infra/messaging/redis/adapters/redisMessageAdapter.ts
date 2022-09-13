@@ -19,7 +19,7 @@ export const redisMessagingAdapter: MessagingAdapter = {
     })
 
     queue.bull.process(queue.name, async ({ data }, done) => {
-      console.log(`[@cube/account]: New "${queue.name}" event received`)
+      console.log(`[@trxit/account]: New "${queue.name}" event received`)
       try {
         const response = await handle(data)
         done(null, response || data)

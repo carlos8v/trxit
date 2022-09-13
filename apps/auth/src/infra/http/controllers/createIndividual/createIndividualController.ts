@@ -1,5 +1,5 @@
 import { Request } from 'express'
-import { created, badRequest } from '@cube/common'
+import { created, badRequest } from '@trxit/common'
 
 import { CreateIndividualControllerFactory, CreateIndividualData } from './createIndividualDTO'
 

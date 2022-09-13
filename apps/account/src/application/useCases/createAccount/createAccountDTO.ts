@@ -1,4 +1,4 @@
-import type { IndividualCreatedPayload } from '@cube/common'
+import type { IndividualCreatedPayload } from '@trxit/common'
 
 import { AccountModel } from '@domain/Account'
 import { WalletModel } from '@domain/Wallet'

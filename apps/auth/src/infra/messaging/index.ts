@@ -5,7 +5,7 @@ import { redisMessagingAdapter } from './redis/adapters/redisMessageAdapter'
 
 export const connectMessageBroker = async () => {
   try {
-    redisMessagingAdapter.process(pingEvent.key, () => console.log('[@cube/auth]: Redis service connected'))
+    redisMessagingAdapter.process(pingEvent.key, () => console.log('[@trxit/auth]: Redis service connected'))
     await redisMessagingAdapter.sendMessage(pingEvent.key, { timestamps: Date.now() })
   } catch (error) {
     console.log(error)

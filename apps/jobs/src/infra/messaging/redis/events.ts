@@ -1,4 +1,4 @@
-import { events } from '@cube/common'
+import { events } from '@trxit/common'
 
 const allEvents = Object.values(events)
 

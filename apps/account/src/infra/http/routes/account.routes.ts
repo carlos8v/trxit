@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { expressRouteAdapter } from '@cube/common'
+import { expressRouteAdapter } from '@trxit/common'
 
 import { getCurrentAccountController } from '../controllers/getCurrentAccount'
 
