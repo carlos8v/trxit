@@ -4,8 +4,8 @@ type TransferType = 'DEPOSIT' | 'TRANSFER' | 'REVERSAL'
 export type TransferModel = {
   id: string
   signature: string | null
-  fromWalletId: string
-  toWalletId: string
+  fromWallet: string
+  toWallet: string
   amount: number
   status: TransferStatus
   type: TransferType

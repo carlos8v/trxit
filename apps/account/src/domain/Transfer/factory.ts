@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto'
-import { CreateTransferData, TransferModel } from '../models'
+import { CreateTransferData, TransferModel } from './model'
 
 export const Transfer = (transferData: CreateTransferData): TransferModel => ({
   ...transferData,
