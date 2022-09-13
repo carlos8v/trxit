@@ -15,7 +15,7 @@ export const createAccountUseCaseFactory = ({
     const username = `${nameArr[0].toLocaleLowerCase()}.${nameArr.pop()?.toLocaleLowerCase()}`
 
     const newAccount = Account({
-      idPerson: accountData.id,
+      ownerId: accountData.id,
       name: accountData.name,
       username,
       document: accountData.cpf,

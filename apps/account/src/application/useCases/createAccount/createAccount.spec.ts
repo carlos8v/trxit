@@ -41,7 +41,7 @@ describe('[@trxit/account]: Create Account UseCase', () => {
 
     expect(response.account).toEqual(
       expect.objectContaining({
-        idPerson: newIndividualCreated.id,
+        ownerId: newIndividualCreated.id,
         document: newIndividualCreated.cpf,
         name: newIndividualCreated.name,
         username: `${newIndividualCreated.name.split(' ')[0].toLowerCase()}.${newIndividualCreated.name.split(' ').pop()?.toLowerCase()}`,
@@ -61,7 +61,7 @@ describe('[@trxit/account]: Create Account UseCase', () => {
   it('Should not create not unique account', async () => {
     const mockedAccountData = makeSut()
     const mockedAccount = Account({
-      idPerson: mockedAccountData.id,
+      ownerId: mockedAccountData.id,
       document: mockedAccountData.cpf,
       name: mockedAccountData.name,
       username: 'fulano.tal'

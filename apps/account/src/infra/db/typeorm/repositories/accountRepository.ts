@@ -13,12 +13,12 @@ const findByDocument: AccountRepository['findByDocument'] = async (document) => 
   return accountRepository.findOneBy({ document })
 }
 
-const findByIdPerson: AccountRepository['findByIdPerson'] = async (idPerson) => {
-  return accountRepository.findOneBy({ idPerson })
+const findByOwnerId: AccountRepository['findByOwnerId'] = async (ownerId) => {
+  return accountRepository.findOneBy({ ownerId })
 }
 
 export const typeormAccountRepository = {
   save,
   findByDocument,
-  findByIdPerson
+  findByOwnerId
 }

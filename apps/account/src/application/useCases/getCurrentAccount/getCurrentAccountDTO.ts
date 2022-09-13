@@ -6,4 +6,4 @@ export type GetCurrentAccountUseCaseFactory = (data: {
   accountRepository: AccountRepository
 }) => GetCurrentAccountUseCase
 
-export type GetCurrentAccountUseCase = (idPerson: string) => Promise<AccountModel>
+export type GetCurrentAccountUseCase = (ownerId: string) => Promise<AccountModel>

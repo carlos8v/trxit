@@ -8,10 +8,10 @@ export class Account {
   id: string
 
   @Column({
-    name: 'id_person',
+    name: 'owner_id',
     type: 'uuid'
   })
-  idPerson: string
+  ownerId: string
 
   @Column({
     type: 'varchar',
