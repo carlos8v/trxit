@@ -10,6 +10,9 @@ export const InMemoryWalletRepositoryFactory = (database: InMemoryDatabase): Wal
     },
     findByOwnerId: async (ownerId) => {
       return [...database.walletsData.values()].filter((wallet) => wallet.ownerId === ownerId)
+    },
+    findById: async (walletId) => {
+      return database.walletsData.get(walletId) || null
     }
   }
 }
