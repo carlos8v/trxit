@@ -7,16 +7,9 @@ export class Wallet {
   @PrimaryColumn({
     name: 'public_key',
     type: 'varchar',
-    length: '174'
+    length: '176'
   })
   publicKey: string
-
-  @Column({
-    name: 'private_key',
-    type: 'varchar',
-    length: '237',
-  })
-  privateKey: string
 
   @Column({
     name: 'owner_id',

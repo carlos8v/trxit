@@ -1,13 +1,12 @@
-import { randomUUID } from 'crypto'
 import { describe, it, expect } from 'vitest'
 
 import { Transfer } from './factory'
+import { walletFactory } from '@tests/db/factories/wallet.factory'
+
 import { signTransfer, verifyTransfer } from './utils'
 
-import { Wallet } from '../Wallet'
-
-const fromWallet = Wallet({ ownerId: randomUUID() })
-const toWallet = Wallet({ ownerId: randomUUID() })
+const { wallet: fromWallet, privateKey } = walletFactory()
+const { wallet: toWallet } = walletFactory()
 
 describe('Transfer model', () => {
   it('should create a transfer object with correct values', () => {
@@ -36,7 +35,7 @@ describe('Transfer model', () => {
       toWallet: toWallet.publicKey,
     })
 
-    signTransfer(newTransfer, fromWallet.privateKey)
+    signTransfer(newTransfer, privateKey)
 
     expect(newTransfer.signature).not.toBeNull()
     expect(typeof newTransfer.signature).toBe('string')
@@ -50,7 +49,7 @@ describe('Transfer model', () => {
       toWallet: toWallet.publicKey,
     })
 
-    signTransfer(newTransfer, fromWallet.privateKey)
+    signTransfer(newTransfer, privateKey)
 
     newTransfer.amount = 100
 

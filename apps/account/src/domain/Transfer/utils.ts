@@ -17,9 +17,10 @@ export const signTransfer = (transfer: TransferModel, base64PrivateKey: string):
 
   const signer = createSign('rsa-sha256')
   signer.update(hash)
+  signer.end()
 
   const privateKey = createPrivateKey({
-    key: Buffer.from(base64PrivateKey, 'base64'),
+    key: Buffer.from(base64PrivateKey, 'hex'),
     format: 'der',
     type: 'pkcs8'
   })
@@ -36,9 +37,10 @@ export const verifyTransfer = (transfer: TransferModel): boolean => {
 
   const verifier = createVerify('rsa-sha256')
   verifier.update(hash)
+  verifier.end()
 
   const publicKey = createPublicKey({
-    key: Buffer.from(transfer.fromWallet, 'base64'),
+    key: Buffer.from(transfer.fromWallet, 'hex'),
     format: 'der',
     type: 'spki'
   })

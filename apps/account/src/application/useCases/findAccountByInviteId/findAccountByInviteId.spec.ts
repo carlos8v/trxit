@@ -11,7 +11,8 @@ import { walletFactory } from '@tests/db/factories/wallet.factory'
 
 const mockedAccount = accountFactory()
 const mockedBlockedAccount = accountFactory('BLOCKED')
-const mockedWallet = walletFactory(mockedAccount.id)
+
+const { wallet: mockedWallet } = walletFactory(mockedAccount.id)
 
 describe('[@trxit/account]: Find account by invite id use case', () => {
   const inMemoryDatabase = inMemoryDatabaseFactory()
