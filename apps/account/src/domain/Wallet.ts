@@ -1,8 +1,9 @@
-import { generateKeyPairSync } from 'crypto'
+import { createHash, generateKeyPairSync } from 'crypto'
 
 export type WalletType = 'INDIVIDUAL'
 
 export type WalletModel = {
+  address: string
   publicKey: string
   ownerId: string
   balance: number
@@ -12,6 +13,7 @@ export type WalletModel = {
 }
 
 type OptionalCreateProps =
+  'address' |
   'balance' |
   'type' |
   'createdAt' |
@@ -30,11 +32,16 @@ export const generateWalletKeyPair = () => {
   }
 }
 
-export const Wallet = (walletData: CreateWalletData): WalletModel => {
-  return {
-    ...walletData,
-    balance: walletData?.balance || 0,
-    type: walletData?.type || 'INDIVIDUAL',
-    createdAt: walletData?.createdAt || new Date()
-  }
+export const getWalletAddress = (publicKey: string) => {
+  return createHash('ripemd160').update(
+    createHash('sha256').update(publicKey).digest('hex')
+  ).digest('hex')
 }
+
+export const Wallet = (walletData: CreateWalletData): WalletModel => ({
+  ...walletData,
+  address: walletData?.address || getWalletAddress(walletData.publicKey),
+  balance: walletData?.balance || 0,
+  type: walletData?.type || 'INDIVIDUAL',
+  createdAt: walletData?.createdAt || new Date()
+})

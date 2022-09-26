@@ -1,12 +1,10 @@
 import { Account } from '@domain/Account'
-import { Wallet } from '@domain/Wallet'
 
-import { CreateAccountUseCaseFactory, CreateAccountUseCase } from './createAccountDTO'
+import { CreateAccountUseCaseFactory } from './createAccountDTO'
 
-export const createAccountUseCaseFactory = ({
-  accountRepository,
-  walletRepository
-}: CreateAccountUseCaseFactory): CreateAccountUseCase => {
+export const createAccountUseCaseFactory: CreateAccountUseCaseFactory = ({
+  accountRepository
+}) => {
   return async (accountData) => {
     const accountExists = await accountRepository.findByDocument(accountData.cpf)
     if (accountExists) throw new Error('Conta já existente')
@@ -22,11 +20,8 @@ export const createAccountUseCaseFactory = ({
       status: 'ACTIVE'
     })
 
-    const newWallet = Wallet({ ownerId: newAccount.id })
-
     await accountRepository.save(newAccount)
-    await walletRepository.save(newWallet)
 
-    return { account: newAccount, wallet: newWallet }
+    return newAccount
   }
 }

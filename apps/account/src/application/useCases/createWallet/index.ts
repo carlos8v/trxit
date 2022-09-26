@@ -1,0 +1,1 @@
+export { createWalletUseCaseFactory } from './createWalletUseCase'

@@ -1,20 +1,15 @@
 import type { IndividualCreatedPayload } from '@trxit/common'
 
 import { AccountModel } from '@domain/Account'
-import { WalletModel } from '@domain/Wallet'
 
 import { AccountRepository } from '@application/repositories/accountRepository'
-import { WalletRepository } from '@application/repositories/walletRepository'
 
 export type CreateAccountData = IndividualCreatedPayload
 
-export type CreateAccountResponse = {
-  account: AccountModel
-  wallet: WalletModel
-}
+export type CreateAccountResponse = AccountModel
 
-export type CreateAccountUseCaseFactory = {
+export type CreateAccountUseCaseFactory = (data: {
   accountRepository: AccountRepository
-  walletRepository: WalletRepository
-}
+}) => CreateAccountUseCase
+
 export type CreateAccountUseCase = (accountData: CreateAccountData) => Promise<CreateAccountResponse>
