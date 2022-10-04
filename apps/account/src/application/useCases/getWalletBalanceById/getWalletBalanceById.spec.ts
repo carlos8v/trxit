@@ -20,12 +20,13 @@ describe('[@trxit/account]: Get wallet balance by id use case', () => {
   })
 
   it('should return correct balance for existent wallet', async () => {
-    const mockedWallet = walletFactory()
-    mockedWallet.balance = 100
+    const { wallet: mockedWallet } = walletFactory()
 
-    inMemoryWalletRepository.save(mockedWallet)
-
+    inMemoryWalletRepository.save({ ...mockedWallet, balance: 100 })
     await expect(getWalletBalanceByIdUseCase(mockedWallet.publicKey)).resolves.toBe(100)
+
+    inMemoryWalletRepository.save({ ...mockedWallet, balance: 150 })
+    await expect(getWalletBalanceByIdUseCase(mockedWallet.publicKey)).resolves.toBe(150)
   })
 
   it('should throw error if wallet does not exist', async () => {
