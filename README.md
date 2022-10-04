@@ -7,8 +7,8 @@ Conta digital
 
 - [x] Criar uma conta
 - [x] Logar em uma conta
-- [ ] Ver o saldo
-- [ ] Ver extrato
+- [x] Ver o saldo por carteira
+- [x] Ver extrato
 - [ ] Transferir dinheiro para outra conta
 
 ## Serviços
