@@ -1,0 +1,1 @@
+export { getTransfersByWalletIdUseCaseFactory } from './getTransfersByWalletIdUseCase'
